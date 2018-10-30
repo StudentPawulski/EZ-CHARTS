@@ -1,4 +1,6 @@
 <?php
 session_start();
-echo print_r($_SESSION);
+require('authenticate.php');
 ?>
+<h4>Login Successful!</h4>
+<a href="creategraph.php">Create Graph</a>

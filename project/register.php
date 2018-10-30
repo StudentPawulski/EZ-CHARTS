@@ -17,23 +17,19 @@ if (isset($_POST['password'])) {
     $password_from_post = $_POST['password'];
 }
 
-
 if (isset($_POST['username']) && isset($_POST['password'])) {
-    $query = "SELECT username FROM userdata";
+    $query = "SELECT username FROM userdata WHERE username = '$username_from_post' LIMIT 1";
     $statement = $db->prepare($query); // Returns a PDOStatement object.
     $statement->execute(); // The query is now executed.
     $userdata = $statement->fetchAll();
 
-    foreach ($userdata as $user) {
-        if ($user['username'] == $username_from_post) {
-            $username_taken_flag = true;
-        }
+    echo print_r($userdata);
+
+    if (count($userdata) === 1) {
+        $username_taken_flag = true;
     }
 }
 
-
-//echo $username_from_post;
-//echo $password_from_post;
 // Sanitize user input to escape HTML entities and filter out dangerous characters.
 if ($username_taken_flag == false) {
     if ($username_from_post != null && $password_from_post != null) {
@@ -59,17 +55,15 @@ if ($username_taken_flag == false) {
     echo 'username is already taken';
 }
 
-
-
+//add a 2nd password field and validate
 
 ?>
 <form method="POST" action="register.php" >
     <label>User Name:</label>
-    <br>
     <input name="username" type="text">
     <br>
     <label>Password</label>
-    <br>
     <input input name="password" type="text">
+    <br>
     <input type="submit">
 </form>
