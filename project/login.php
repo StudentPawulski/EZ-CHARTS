@@ -1,6 +1,4 @@
 <?php
-
-
 require('connect.php');
 $username_from_post = '';
 $password_from_post = '';
@@ -37,7 +35,7 @@ if ($username_from_post != null && $password_from_post != null) {
                 $_SESSION['isAdmin'] = $user['isAdmin'];
                 direct();
             } else {
-                echo 'Incorrect password.';
+                echo 'Incorrect password. Log in attempt failed';
             }
             echo print_r($_SESSION);
         }

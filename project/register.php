@@ -17,23 +17,19 @@ if (isset($_POST['password'])) {
     $password_from_post = $_POST['password'];
 }
 
-
 if (isset($_POST['username']) && isset($_POST['password'])) {
-    $query = "SELECT username FROM userdata";
+    $query = "SELECT username FROM userdata WHERE username LIKE '$username_from_post'";
     $statement = $db->prepare($query); // Returns a PDOStatement object.
     $statement->execute(); // The query is now executed.
     $userdata = $statement->fetchAll();
 
-    foreach ($userdata as $user) {
-        if ($user['username'] == $username_from_post) {
-            $username_taken_flag = true;
-        }
+    echo print_r($userdata);
+
+    if ($userdata[0]['username'] == $username_from_post) {
+        $username_taken_flag = true;
     }
 }
 
-
-//echo $username_from_post;
-//echo $password_from_post;
 // Sanitize user input to escape HTML entities and filter out dangerous characters.
 if ($username_taken_flag == false) {
     if ($username_from_post != null && $password_from_post != null) {
