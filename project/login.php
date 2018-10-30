@@ -17,7 +17,7 @@ if ($username_from_post != null && $password_from_post != null) {
     $username = filter_var($username_from_post, FILTER_SANITIZE_SPECIAL_CHARS);
     $password = filter_var($password_from_post, FILTER_SANITIZE_SPECIAL_CHARS);
 
-    $query = "SELECT * FROM userdata";
+    $query = "SELECT username, password, isAdmin FROM userdata WHERE username = $username";
     $statement = $db->prepare($query); // Returns a PDOStatement object.
     $statement->execute(); // The query is now executed.
     $userdata = $statement->fetchAll();
