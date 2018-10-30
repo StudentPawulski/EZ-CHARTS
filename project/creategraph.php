@@ -1,7 +1,66 @@
 <?php
 require('authenticate.php');
 
+$title_from_post = '';
+$type_from_post = '';
+$is_public_from_post = '';
+$x_axis_name_from_post = '';
+$y_axis_name_from_post = '';
 
+$x_axis1_from_post = '';
+$x_axis2_from_post = '';
+$x_axis3_from_post = '';
+$x_axis4_from_post = '';
+$x_axis5_from_post = '';
+$x_axis6_from_post = '';
+$x_axis7_from_post = '';
+$x_axis8_from_post = '';
+$x_axis9_from_post = '';
+$x_axis10_from_post = '';
+$x_axis11_from_post = '';
+$x_axis12_from_post = '';
+$y_axis1_from_post = null;
+$y_axis2_from_post = null;
+$y_axis3_from_post = null;
+$y_axis4_from_post = null;
+$y_axis5_from_post = null;
+$y_axis6_from_post = null;
+$y_axis7_from_post = null;
+$y_axis8_from_post = null;
+$y_axis9_from_post = null;
+$y_axis10_from_post = null;
+$y_axis11_from_post = null;
+$y_axis12_from_post = null;
+
+if (isset($_POST['title'])) {
+    $title_from_post = $_POST['title'];
+}
+
+if (isset($_POST['type'])) {
+    $type_from_post = $_POST['type'];
+}
+
+if (isset($_POST['public'])) {
+    if ($_POST['public'] == false)
+        $is_public_from_post = 0;
+    else {
+        $is_public_from_post = 1;
+    }
+}
+
+if (isset($_POST['xAxisName'])) {
+    $x_axis_name_from_post = $_POST['xAxisName'];
+}
+
+if (isset($_POST['yAxisName'])) {
+    $y_axis_name_from_post = $_POST['yAxisName'];
+}
+
+
+
+do {
+    # code...
+} while ($a <= 10);
 
 ?>
 
