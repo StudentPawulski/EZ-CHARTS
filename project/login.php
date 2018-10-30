@@ -16,7 +16,6 @@ if ($username_from_post != null && $password_from_post != null) {
     $password = filter_var($password_from_post, FILTER_SANITIZE_SPECIAL_CHARS);
 
     $query = "SELECT userid, username, hashedPassword, isAdmin FROM userdata WHERE username = '$username' LIMIT 1";
-    echo $query;
     $statement = $db->prepare($query); // Returns a PDOStatement object.
     $statement->execute(); // The query is now executed.
     $userdata = $statement->fetchAll();
@@ -35,7 +34,6 @@ if ($username_from_post != null && $password_from_post != null) {
         } else {
             echo 'Incorrect password. Log in attempt failed';
         }
-        echo print_r($_SESSION);
     }
 
 }
