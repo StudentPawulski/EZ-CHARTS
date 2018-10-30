@@ -146,6 +146,7 @@ if ($title_from_post != null &&
     echo 'Required fields are not complete';
 }
 
+//testing
 function direct()
 {
     header('Location: http://localhost:31337/webproject/project/home.php');
