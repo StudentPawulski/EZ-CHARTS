@@ -18,14 +18,14 @@ if (isset($_POST['password'])) {
 }
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
-    $query = "SELECT username FROM userdata WHERE username LIKE '$username_from_post'";
+    $query = "SELECT username FROM userdata WHERE username = '$username_from_post' LIMIT 1";
     $statement = $db->prepare($query); // Returns a PDOStatement object.
     $statement->execute(); // The query is now executed.
     $userdata = $statement->fetchAll();
 
     echo print_r($userdata);
 
-    if ($userdata[0]['username'] == $username_from_post) {
+    if (count($userdata) === 1) {
         $username_taken_flag = true;
     }
 }
@@ -54,6 +54,8 @@ if ($username_taken_flag == false) {
 } else {
     echo 'username is already taken';
 }
+
+//add a 2nd password field and validate
 
 ?>
 <form method="POST" action="register.php" >
