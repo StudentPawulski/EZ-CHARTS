@@ -141,8 +141,15 @@ if ($title_from_post != null &&
 
     // Execute the INSERT.
     $statement->execute();
+    direct();
 } else {
     echo 'Required fields are not complete';
+}
+
+function direct()
+{
+    header('Location: http://localhost:31337/webproject/project/home.php');
+    exit;
 }
 
 ?>
