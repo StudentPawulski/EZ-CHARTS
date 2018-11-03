@@ -50,7 +50,7 @@ function direct()
     <input name="username" type="text">
     <br>
     <label>Password</label>
-    <input input name="password" type="text">
+    <input input name="password" type="password">
     <br>
     <input type="submit">
 </form>

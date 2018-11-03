@@ -40,19 +40,18 @@ if (isset($_POST['yAxisName'])) {
 
 $a = 1;
 if (isset($_POST['xAxis' . $a])) {
-    while ($_POST['xAxis' . $a] != null && $_POST['xAxis' . $a] <= 12) {
+    while ($_POST['xAxis' . $a] != null && $a <= 12) {
         $x_axis_from_post[$a] = $_POST['xAxis' . $a];
         $a++;
         if ($a === 13) {
             break;
         }
     }
-
 }
 
 $b = 1;
 if (isset($_POST['yAxis' . $b])) {
-    while ($_POST['yAxis' . $b] != null && $_POST['yAxis' . $b] <= 12) {
+    while ($_POST['yAxis' . $b] != null && $b <= 12) {
         $y_axis_from_post[$b] = $_POST['yAxis' . $b];
         $b++;
         if ($b === 13) {
@@ -86,7 +85,7 @@ if ($title_from_post != null &&
 
     $b = 1;
     while ($y_axis_from_post[$b] != null) {
-        $y_axis[$b] = filter_var($y_axis_from_post[$b], FILTER_SANITIZE_SPECIAL_CHARS);
+        $y_axis[$b] = filter_var($y_axis_from_post[$b], FILTER_SANITIZE_NUMBER_FLOAT);
         $b++;
         if ($b === 13) {
             break;
