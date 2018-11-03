@@ -13,7 +13,7 @@ $graphs = $statement->fetchAll();
 
 
 ?>
-<h4>Login Successful!</h4>
+<h4>Hello, <?= $_SESSION['username'] ?>. Enjoy your charts mate!</h4>
 <a href="creategraph.php">Create Graph</a>
 
 <?php foreach ($graphs as $graph) : ?>
