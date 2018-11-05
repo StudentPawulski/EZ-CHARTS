@@ -2,27 +2,31 @@
 require('authenticate.php');
 require('connect.php');
 
-if ($_POST) {
+$graphId;
 
+if ($_GET['graphId'] != null) {
+    $graphId = filter_var($_GET['graphId'], FILTER_SANITIZE_NUMBER_INT);
+    $_SESSION['graphId'] = $graphId;
+    $userid = $_SESSION['userid'];
+    echo 'cats';
+}
+
+if ($_POST) {
     $title_from_post = '';
     $type_from_post = '';
     $is_public_from_post = '';
     $x_axis_name_from_post = '';
     $y_axis_name_from_post = '';
-
     $x_axis_from_post = array_fill(1, 12, null);
     $y_axis_from_post = array_fill(1, 12, null);
     $x_axis = array_fill(1, 12, null);
     $y_axis = array_fill(1, 12, null);
-
     if (isset($_POST['title'])) {
         $title_from_post = $_POST['title'];
     }
-
     if (isset($_POST['type'])) {
         $type_from_post = $_POST['type'];
     }
-
     if (isset($_POST['public'])) {
         if ($_POST['public'] == false)
             $is_public_from_post = 0;
@@ -30,16 +34,12 @@ if ($_POST) {
             $is_public_from_post = 1;
         }
     }
-
     if (isset($_POST['xAxisName'])) {
         $x_axis_name_from_post = $_POST['xAxisName'];
     }
-
     if (isset($_POST['yAxisName'])) {
         $y_axis_name_from_post = $_POST['yAxisName'];
     }
-
-
     $a = 1;
     if (isset($_POST['xAxis' . $a])) {
         while ($_POST['xAxis' . $a] != null && $a <= 12) {
@@ -50,7 +50,6 @@ if ($_POST) {
             }
         }
     }
-
     $b = 1;
     if (isset($_POST['yAxis' . $b])) {
         while ($_POST['yAxis' . $b] != null && $b <= 12) {
@@ -62,9 +61,11 @@ if ($_POST) {
         }
     }
 
+    echo $title_from_post . $type_from_post . $x_axis_name_from_post . $y_axis_name_from_post . $x_axis_from_post[1] . $y_axis_from_post[1];
+
+
     if ($title_from_post != null &&
         $type_from_post != null &&
-        $is_public_from_post != null &&
         $x_axis_name_from_post != null &&
         $y_axis_name_from_post != null &&
         $x_axis_from_post[1] != null &&
@@ -84,7 +85,6 @@ if ($_POST) {
                 break;
             }
         }
-
         $b = 1;
         while ($y_axis_from_post[$b] != null) {
             $y_axis[$b] = filter_var($y_axis_from_post[$b], FILTER_SANITIZE_NUMBER_FLOAT);
@@ -93,25 +93,23 @@ if ($_POST) {
                 break;
             }
         }
-
-
-
     //Hash password
     // Build the parameterized SQL query and bind to the above sanitized values.
-
-        $query = "UPDATE graphdata (ownerId, title, type, isPublic, xAxisName, yAxisName,
-    xAxis1, xAxis2, xAxis3, xAxis4, xAxis5, xAxis6,
-    xAxis7, xAxis8, xAxis9, xAxis10, xAxis11, xAxis12, 
-    yAxis1, yAxis2, yAxis3, yAxis4, yAxis5, yAxis6,
-    yAxis7, yAxis8, yAxis9, yAxis10, yAxis11, yAxis12
-    ) values (:ownerId, :title, :type, :isPublic, :xAxisName, :yAxisName,
-    :xAxis1, :xAxis2, :xAxis3, :xAxis4, :xAxis5, :xAxis6,
-    :xAxis7, :xAxis8, :xAxis9, :xAxis10, :xAxis11, :xAxis12, 
-    :yAxis1, :yAxis2, :yAxis3, :yAxis4, :yAxis5, :yAxis6,
-    :yAxis7, :yAxis8, :yAxis9, :yAxis10, :yAxis11, :yAxis12)";
+        $query = "UPDATE graphdata 
+                    SET title = :title, type = :type, isPublic = :isPublic,
+                    xAxisName = :xAxisName, yAxisName = :yAxisName,
+                    xAxis1 = :xAxis1, xAxis2 = :xAxis2, xAxis3 = :xAxis3,
+                    xAxis4 = :xAxis4, xAxis5 = :xAxis5, xAxis6 = :xAxis6,
+                    xAxis7 = :xAxis7, xAxis8 = :xAxis8, xAxis9 = :xAxis9,
+                    xAxis10 = :xAxis10, xAxis11 = :xAxis11, xAxis12 = :xAxis12, 
+                    yAxis1 = :yAxis1, yAxis2 = :yAxis2, yAxis3 = :yAxis3,
+                    yAxis4 = :yAxis4, yAxis5 = :yAxis5, yAxis6 = :yAxis6,
+                    yAxis7 = :yAxis7, yAxis8 = :yAxis8, yAxis9 = :yAxis9,
+                    yAxis10 = :yAxis10, yAxis11 = :yAxis11, yAxis12 = :yAxis12
+                    WHERE graphId = :graphId";
         $statement = $db->prepare($query);
-        $statement->bindValue(':ownerId', $owner_id);
         $statement->bindValue(':title', $title);
+        $statement->bindValue(':graphId', $_SESSION['graphId']);
         $statement->bindValue(':type', $type_from_post);
         $statement->bindValue(':isPublic', $is_public);
         $statement->bindValue(':xAxisName', $x_axis_name);
@@ -140,12 +138,16 @@ if ($_POST) {
         $statement->bindValue(':yAxis10', $y_axis[10]);
         $statement->bindValue(':yAxis11', $y_axis[11]);
         $statement->bindValue(':yAxis12', $y_axis[12]);
-
 // Execute the INSERT.
         $statement->execute();
+        echo $query;
         direct();
     } else {
-        echo 'Required fields are not complete';
+        echo '<script language="javascript">';
+        echo 'alert("All required fields need to be completed")';
+        echo '</script>';
+        //header("Location: http://localhost:31337/webproject/project/editchart.php?graphId=" . $_SESSION['graphId']);
+        exit;
     }
 }
 
@@ -155,17 +157,12 @@ function direct()
     exit;
 }
 
-if (isset($_GET['graphId'])) {
-    $graphId = filter_var($_GET['graphId'], FILTER_SANITIZE_NUMBER_INT);
-    $userid = $_SESSION['userid'];
-    //echo $graphId;
-    //echo '<br';
+if (!$_POST) {
+    $query = "SELECT * FROM graphdata WHERE graphId = '$graphId' AND ownerId = '$userid'";
+    $statement = $db->prepare($query); // Returns a PDOStatement object.
+    $statement->execute(); // The query is now executed.
+    $graphs = $statement->fetchAll();
 }
-
-$query = "SELECT * FROM graphdata WHERE graphId = '$graphId' AND ownerId = '$userid'";
-$statement = $db->prepare($query); // Returns a PDOStatement object.
-$statement->execute(); // The query is now executed.
-$graphs = $statement->fetchAll();
 ?>
 
 <form method="POST" action="editchart.php" >
@@ -179,85 +176,85 @@ $graphs = $statement->fetchAll();
     </select>
     <br>
     <label>Would you like the graph to be viewable by the public?</label>
-    <input input name="public" type="checkbox">
+    <input name="public" type="checkbox">
     <br>
     <label>X Axis Name: </label>
-    <input input name="xAxisName" type="text" value="<?= $graphs[0]['xAxisName'] ?>">
+    <input name="xAxisName" type="text" value="<?= $graphs[0]['xAxisName'] ?>">
     <br>
     <label>Y Axis Name: </label>
-    <input input name="yAxisName" type="text" value="<?= $graphs[0]['yAxisName'] ?>">
+    <input name="yAxisName" type="text" value="<?= $graphs[0]['yAxisName'] ?>">
     <br>
     <label>X Axis 1: </label>
-    <input input name="xAxis1" type="text" value="<?= $graphs[0]['xAxis1'] ?>">
+    <input name="xAxis1" type="text" value="<?= $graphs[0]['xAxis1'] ?>">
     <br>
     <label>X Axis 2: </label>
-    <input input name="xAxis2" type="text" value="<?= $graphs[0]['xAxis2'] ?>">
+    <input name="xAxis2" type="text" value="<?= $graphs[0]['xAxis2'] ?>">
     <br>
     <label>X Axis 3: </label>
-    <input input name="xAxis3" type="text" value="<?= $graphs[0]['xAxis3'] ?>">
+    <input name="xAxis3" type="text" value="<?= $graphs[0]['xAxis3'] ?>">
     <br>
     <label>X Axis 4: </label>
-    <input input name="xAxis4" type="text" value="<?= $graphs[0]['xAxis4'] ?>">
+    <input name="xAxis4" type="text" value="<?= $graphs[0]['xAxis4'] ?>">
     <br>
     <label>X Axis 5: </label>
-    <input input name="xAxis5" type="text" value="<?= $graphs[0]['xAxis5'] ?>">
+    <input name="xAxis5" type="text" value="<?= $graphs[0]['xAxis5'] ?>">
     <br>
     <label>X Axis 6: </label>    
-    <input input name="xAxis6" type="text" value="<?= $graphs[0]['xAxis6'] ?>">
+    <input name="xAxis6" type="text" value="<?= $graphs[0]['xAxis6'] ?>">
     <br>
     <label>X Axis 7: </label>
-    <input input name="xAxis7" type="text" value="<?= $graphs[0]['xAxis7'] ?>">
+    <input name="xAxis7" type="text" value="<?= $graphs[0]['xAxis7'] ?>">
     <br>
     <label>X Axis 8: </label>
-    <input input name="xAxis8" type="text" value="<?= $graphs[0]['xAxis8'] ?>">
+    <input name="xAxis8" type="text" value="<?= $graphs[0]['xAxis8'] ?>">
     <br>
     <label>X Axis 9: </label>
-    <input input name="xAxis9" type="text" value="<?= $graphs[0]['xAxis9'] ?>">
+    <input name="xAxis9" type="text" value="<?= $graphs[0]['xAxis9'] ?>">
     <br>
     <label>X Axis 10: </label>
-    <input input name="xAxis10" type="text" value="<?= $graphs[0]['xAxis10'] ?>">
+    <input name="xAxis10" type="text" value="<?= $graphs[0]['xAxis10'] ?>">
     <br>
     <label>X Axis 11: </label>
-    <input input name="xAxis11" type="text" value="<?= $graphs[0]['xAxis11'] ?>">
+    <input name="xAxis11" type="text" value="<?= $graphs[0]['xAxis11'] ?>">
     <br>
     <label>X Axis 12: </label>
-    <input input name="xAxis12" type="text" value="<?= $graphs[0]['xAxis12'] ?>">
+    <input name="xAxis12" type="text" value="<?= $graphs[0]['xAxis12'] ?>">
     <br>
     <label>Y Axis 1: </label>
-    <input input name="yAxis1" type="number" step="0.01" value="<?= $graphs[0]['yAxis1'] ?>">
+    <input name="yAxis1" type="number" step="0.01" value="<?= $graphs[0]['yAxis1'] ?>">
     <br>
     <label>Y Axis 2: </label>
-    <input input name="yAxis2" type="number" step="0.01" value="<?= $graphs[0]['yAxis2'] ?>">
+    <input name="yAxis2" type="number" step="0.01" value="<?= $graphs[0]['yAxis2'] ?>">
     <br>
     <label>Y Axis 3: </label>
-    <input input name="yAxis3" type="number" step="0.01" value="<?= $graphs[0]['yAxis3'] ?>">
+    <input name="yAxis3" type="number" step="0.01" value="<?= $graphs[0]['yAxis3'] ?>">
     <br>
     <label>Y Axis 4: </label>
-    <input input name="yAxis4" type="number" step="0.01" value="<?= $graphs[0]['yAxis4'] ?>">
+    <input name="yAxis4" type="number" step="0.01" value="<?= $graphs[0]['yAxis4'] ?>">
     <br>
     <label>Y Axis 5: </label>
-    <input input name="yAxis5" type="number" step="0.01" value="<?= $graphs[0]['yAxis5'] ?>">
+    <input name="yAxis5" type="number" step="0.01" value="<?= $graphs[0]['yAxis5'] ?>">
     <br>
     <label>Y Axis 6: </label>
-    <input input name="yAxis6" type="number" step="0.01" value="<?= $graphs[0]['yAxis6'] ?>">
+    <input name="yAxis6" type="number" step="0.01" value="<?= $graphs[0]['yAxis6'] ?>">
     <br>
     <label>Y Axis 7: </label>
-    <input input name="yAxis7" type="number" step="0.01" value="<?= $graphs[0]['yAxis7'] ?>">
+    <input name="yAxis7" type="number" step="0.01" value="<?= $graphs[0]['yAxis7'] ?>">
     <br>
     <label>Y Axis 8: </label>
-    <input input name="yAxis8" type="number" step="0.01" value="<?= $graphs[0]['yAxis8'] ?>">
+    <input name="yAxis8" type="number" step="0.01" value="<?= $graphs[0]['yAxis8'] ?>">
     <br>
     <label>Y Axis 9: </label>
-    <input input name="yAxis9" type="number" step="0.01" value="<?= $graphs[0]['yAxis9'] ?>">
+    <input name="yAxis9" type="number" step="0.01" value="<?= $graphs[0]['yAxis9'] ?>">
     <br>
     <label>Y Axis 10: </label>
-    <input input name="yAxis10" type="number" step="0.01" value="<?= $graphs[0]['yAxis10'] ?>">
+    <input name="yAxis10" type="number" step="0.01" value="<?= $graphs[0]['yAxis10'] ?>">
     <br>
     <label>Y Axis 11: </label>
-    <input input name="yAxis11" type="number" step="0.01" value="<?= $graphs[0]['yAxis11'] ?>">
+    <input name="yAxis11" type="number" step="0.01" value="<?= $graphs[0]['yAxis11'] ?>">
     <br>
     <label>Y Axis 12: </label>
-    <input input name="yAxis12" type="number" step="0.01" value="<?= $graphs[0]['yAxis12'] ?>">
+    <input name="yAxis12" type="number" step="0.01" value="<?= $graphs[0]['yAxis12'] ?>">
     <br>
     <input type="submit">
 </form>

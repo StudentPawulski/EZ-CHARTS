@@ -5,8 +5,6 @@ require('connect.php');
 if (isset($_GET['graphId'])) {
     $graphId = filter_var($_GET['graphId'], FILTER_SANITIZE_NUMBER_INT);
     $userid = $_SESSION['userid'];
-    //echo $graphId;
-    //echo '<br';
 }
 
 $query = "SELECT * FROM graphdata WHERE graphId = '$graphId' AND ownerId = '$userid'";
@@ -16,21 +14,19 @@ $graphs = $statement->fetchAll();
 
 //echo print_r($graphs);
 
-echo '<br>';
 $yAxisName = $graphs[0]['yAxisName'];
 $AxisName = $graphs[0]['yAxisName'];
 $title = $graphs[0]['title'];
-echo '<br>';
 //echo print_r($graphs);
 
-$x_axis = array_fill(1, 12, null);
-$y_axis = array_fill(1, 12, null);
+$x_axis = []; //array_fill(1, 12, null);
+$y_axis = []; //array_fill(1, 12, null);
 
 for ($i = 1; $i < 13; $i++) {
     if ($graphs[0]['yAxis' . $i] != null ||
         $graphs[0]['xAxis' . $i] != null) {
-        $x_axis[$i] = $graphs[0]['xAxis' . $i];
-        $y_axis[$i] = $graphs[0]['yAxis' . $i];
+        $x_axis[] = $graphs[0]['xAxis' . $i];
+        $y_axis[] = (float)$graphs[0]['yAxis' . $i];
     } else {
         break;
     }
@@ -42,9 +38,6 @@ $series = [
     'name' => $yAxisName,
     'data' => $y_axis
 ];
-
-echo print_r($y_axis);
-echo print_r($x_axis);
 
 $title = [
     'text' => $title,
@@ -73,7 +66,6 @@ $xaxis = [
         const series_data = <?= json_encode($series) ?>;
         const xaxis_data = <?= json_encode($xaxis) ?>;
         const title_data = <?= json_encode($title) ?>;
-
     </script>
 </head>
 <body>
@@ -83,6 +75,9 @@ $xaxis = [
 <script src="chart.js"></script>
 
 <a href="editchart.php?graphId=<?= $graphId ?>">Edit Chart</a>
+<a href="deletechart.php?graphId=<?= $graphId ?>">Delete Chart</a>
+<br>
+<a href="home.php">Home</a>
 </form>
 </body>
 </html>
