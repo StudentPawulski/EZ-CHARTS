@@ -71,7 +71,6 @@ $xaxis = [
 <body>
 <div class="container">
   <div id="chart"></div>
-  <button id="change">Horizontal</button>
 <script src="chart.js"></script>
 
 <a href="editchart.php?graphId=<?= $graphId ?>">Edit Chart</a>

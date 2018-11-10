@@ -31,6 +31,7 @@ const chart = new ApexCharts(document.querySelector("#chart"), options);
 chart.render();
 
 // Event example
+/*
 document.getElementById("change").addEventListener("click", () =>
   chart.updateOptions({
     plotOptions: {
@@ -40,6 +41,7 @@ document.getElementById("change").addEventListener("click", () =>
     }
   })
 );
+*/
 
 /*
 // Chart options
