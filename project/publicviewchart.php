@@ -1,14 +1,12 @@
 <?php
 
-require('./php/authenticate.php');
 require('./php/connect.php');
 
 if (isset($_GET['graphId'])) {
     $graphId = filter_var($_GET['graphId'], FILTER_SANITIZE_NUMBER_INT);
-    $userid = $_SESSION['userid'];
 }
 
-$query = "SELECT * FROM graphdata WHERE graphId = '$graphId' AND ownerId = '$userid'";
+$query = "SELECT * FROM graphdata WHERE graphId = '$graphId' AND isPublic = 1";
 $statement = $db->prepare($query); // Returns a PDOStatement object.
 $statement->execute(); // The query is now executed.
 $graphs = $statement->fetchAll();
@@ -120,9 +118,7 @@ $xaxis = [
                         <div class="container">
                             <div id="chart">
                                 <script src="js/chart.js"></script>
-                                <a href="dashboard.php" class="btn btn-primary btn-rounded" role="button">Home</a>
-                                <a href="php/editchart.php?graphId=<?= $graphId ?>" class="btn btn-warning btn-rounded" role="button">Edit Chart</a>
-                                <a href="php/deletechart.php?graphId=<?= $graphId ?>" class="btn btn-danger btn-rounded" role="button">Delete Chart</a>                                
+                                <a href="publiccharts.php" class="btn btn-primary btn-rounded" role="button">Home</a>
                             </div>
                         </div>
                     </div>

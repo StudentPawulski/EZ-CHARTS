@@ -1,46 +1,77 @@
 <?php
-require('.\php\connect.php');
+require('./php/connect.php');
+$options = [
+  'cost' => 11,
+];
+
 $username_from_post = '';
 $password_from_post = '';
+$email_from_post = '';
+
+$username_taken_flag = false;
 
 if (isset($_POST['username'])) {
   $username_from_post = $_POST['username'];
 }
 
-if (isset($_POST['password'])) {
-  $password_from_post = $_POST['password'];
+if (isset($_POST['password1'])) {
+  if ($_POST['password1'] === $_POST['password2'])
+    $password_from_post = $_POST['password1'];
+  else {
+    echo 'Passwords do not match, please try again';
+  }
 }
 
-if ($username_from_post != null && $password_from_post != null) {
-  $username = filter_var($username_from_post, FILTER_SANITIZE_SPECIAL_CHARS);
-  $password = filter_var($password_from_post, FILTER_SANITIZE_SPECIAL_CHARS);
+if (isset($_POST['email'])) {
+  $email_from_post = $_POST['email'];
+}
 
-  $query = "SELECT userid, username, hashedPassword, isAdmin FROM userdata WHERE username = '$username' LIMIT 1";
+
+if (isset($_POST['username']) && isset($_POST['password'])) {
+  $query = "SELECT username FROM userdata WHERE username = '$username_from_post' LIMIT 1";
   $statement = $db->prepare($query); // Returns a PDOStatement object.
   $statement->execute(); // The query is now executed.
   $userdata = $statement->fetchAll();
 
+  echo print_r($userdata);
 
   if (count($userdata) === 1) {
-    $user = $userdata[0];
-    $hashed_password_from_DB = $user['hashedPassword'];
-    if (password_verify($password_from_post, $hashed_password_from_DB)) {
-      echo 'Password is correct!';
-      session_start();
-      $_SESSION['userid'] = $user['userid'];
-      $_SESSION['username'] = $user['username'];
-      $_SESSION['isAdmin'] = $user['isAdmin'];
-      direct();
-    } else {
-      echo 'Incorrect password. Log in attempt failed';
-    }
+    $username_taken_flag = true;
   }
+}
 
+// Sanitize user input to escape HTML entities and filter out dangerous characters.
+if ($username_taken_flag == false) {
+  if ($username_from_post != null && $password_from_post != null) {
+    $username = filter_var($username_from_post, FILTER_SANITIZE_SPECIAL_CHARS);
+    $password = filter_var($password_from_post, FILTER_SANITIZE_SPECIAL_CHARS);
+    $email = filter_var($email_from_post, FILTER_SANITIZE_EMAIL);
+    //Hash password
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT, $options);
+    //set admin priv
+    $isadmin = 0;
+    $photo = null;
+    // Build the parameterized SQL query and bind to the above sanitized values.
+    $query = "INSERT INTO userdata (username, hashedPassword, isAdmin, photo, email) values (:username, :hashedpassword, :isadmin, :photo, :email)";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':username', $username);
+    $statement->bindValue(':hashedpassword', $hashed_password);
+    $statement->bindValue(':isadmin', $isadmin);
+    $statement->bindValue(':photo', $photo);
+    $statement->bindValue(':email', $email);
+
+    // Execute the INSERT.
+    $statement->execute();
+
+    direct();
+  }
+} else {
+  echo 'username is already taken';
 }
 
 function direct()
 {
-  header('Location: ./dashboard.php');
+  header('Location: confirmregistration.php');
   exit;
 }
 
@@ -185,41 +216,17 @@ function direct()
           <!-- Grid row -->
           <div class="row wow fadeIn">
             <!-- Grid column -->
-            <div class="col-md-6 mb-4 white-text text-center text-md-left">
-              <h1 class="display-4 font-weight-bold">
-                EZ-CHARTS
-              </h1>
-
-              <hr class="hr-light" />
-
-              <p><strong>A simple and elegant way to display data</strong></p>
-
-              <p class="mb-4 d-none d-md-block">
-                <strong
-                  >Not a member? You can still view public charts by clicking the button below
-                </strong>
-              </p>
-
-              <a
-                target="_blank"
-                href="./publiccharts.php"
-                class="btn btn-indigo btn-lg"
-                >Public Charts <i class="fa fa-graduation-cap ml-2"></i>
-              </a>
-            </div>
             <!-- Grid column -->
-
             <!-- Grid column -->
-            <div class="col-md-6 col-xl-5 mb-4">
               <!-- Card -->
               <div class="card">
                 <!-- Card content -->
                 <div class="card-body">
                   <!-- Form -->
-                  <form name="login" method="POST" action="index.php">
+                  <form name="register" method="POST" action="register.php">
                     <!-- Heading -->
                     <h3 class="dark-grey-text text-center">
-                      <strong>Existing user? Log in</strong>
+                      <strong>Register for your own account</strong>
                     </h3>
                     <hr />
 
@@ -228,18 +235,29 @@ function direct()
                       <input type="text" id="form3" class="form-control" name="username"/>
                       <label for="form3">User Name</label>
                     </div>
+
+                    <div class="md-form">
+                      <i class="fa fa-envelope prefix grey-text"></i>
+                      <input type="email" id="form3" class="form-control" name="email"/>
+                      <label for="form3">E-mail</label>
+                    </div>
+                    
                     <div class="md-form">
                       <i class="fa fa-key prefix grey-text"></i>
-                      <input type="text" id="form2" class="form-control" name="password"/>
+                      <input type="password" id="form2" class="form-control" name="password1"/>
                       <label for="form2">Password</label>
+                    </div>
+
+                    <div class="md-form">
+                      <i class="fa fa-key prefix grey-text"></i>
+                      <input type="password" id="form2" class="form-control" name="password2"/>
+                      <label for="form2">Re-Enter Password</label>
                     </div>
 
 
                     <div class="text-center">
-                      <button class="btn btn-indigo" type="submit">Sign In</button>
-                      <a href="register.php" class="btn btn-secondary btn-rounded" role="button">New User Sign Up</a>
+                      <button class="btn btn-indigo" type="submit">Submit</button>
                       <hr />
-
                     </div>
                   </form>
                   <!-- Form -->
@@ -250,7 +268,6 @@ function direct()
             <!-- Grid column -->
           </div>
           <!-- Grid row -->
-        </div>
         <!-- Content -->
       </div>
       <!-- Mask & flexbox options -->

@@ -9,7 +9,7 @@
     <div class="container-fluid">
 
         <!-- Brand -->
-        <a class="navbar-brand waves-effect" href="https://mdbootstrap.com/material-design-for-bootstrap/"
+        <a class="navbar-brand waves-effect" href="index.php"
             target="_blank">
             <strong class="blue-text">EZ-CHARTS</strong>
         </a>
@@ -26,7 +26,12 @@
             <!-- Left -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link waves-effect" href="#">Home
+                    <a class="nav-link waves-effect" href="
+                    <?php if (isset($_SESSION['userId'])) : ?>
+                        <?= 'dashboard.php' ?>
+                    <?php else : ?>
+                        <?= 'publiccharts.php' ?>
+                    <?php endif ?>">Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
@@ -78,12 +83,14 @@
             <a href="#" class="list-group-item list-group-item-action waves-effect">
                 <i class="fa fa-user mr-3"></i>Profile</a>
         <?php endif ?>
+
         <?php if (isset($_SESSION['isadmin'])) : ?>
             <?php if ($_SESSION['isadmin'] === 1) : ?>
             <a href="#" class="list-group-item list-group-item-action waves-effect">
                 <i class="fa fa-user-plus"></i>Admin Tools</a>
                 <?php endif ?>
         <?php endif ?>
+
         <?php if (isset($_SESSION['userid'])) : ?>
         <a href="#" class="list-group-item list-group-item-action waves-effect">
             <i class="fa fa-table mr-3"></i>Create Chart</a>

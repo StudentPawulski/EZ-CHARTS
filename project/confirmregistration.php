@@ -1,48 +1,4 @@
 <?php
-require('.\php\connect.php');
-$username_from_post = '';
-$password_from_post = '';
-
-if (isset($_POST['username'])) {
-  $username_from_post = $_POST['username'];
-}
-
-if (isset($_POST['password'])) {
-  $password_from_post = $_POST['password'];
-}
-
-if ($username_from_post != null && $password_from_post != null) {
-  $username = filter_var($username_from_post, FILTER_SANITIZE_SPECIAL_CHARS);
-  $password = filter_var($password_from_post, FILTER_SANITIZE_SPECIAL_CHARS);
-
-  $query = "SELECT userid, username, hashedPassword, isAdmin FROM userdata WHERE username = '$username' LIMIT 1";
-  $statement = $db->prepare($query); // Returns a PDOStatement object.
-  $statement->execute(); // The query is now executed.
-  $userdata = $statement->fetchAll();
-
-
-  if (count($userdata) === 1) {
-    $user = $userdata[0];
-    $hashed_password_from_DB = $user['hashedPassword'];
-    if (password_verify($password_from_post, $hashed_password_from_DB)) {
-      echo 'Password is correct!';
-      session_start();
-      $_SESSION['userid'] = $user['userid'];
-      $_SESSION['username'] = $user['username'];
-      $_SESSION['isAdmin'] = $user['isAdmin'];
-      direct();
-    } else {
-      echo 'Incorrect password. Log in attempt failed';
-    }
-  }
-
-}
-
-function direct()
-{
-  header('Location: ./dashboard.php');
-  exit;
-}
 
 ?>
 
@@ -177,83 +133,18 @@ function direct()
       style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg'); background-repeat: no-repeat; background-size: cover;"
     >
       <!-- Mask & flexbox options -->
-      <div
-        class="mask rgba-black-light d-flex justify-content-center align-items-center"
-      >
-        <!-- Content -->
-        <div class="container">
-          <!-- Grid row -->
-          <div class="row wow fadeIn">
-            <!-- Grid column -->
-            <div class="col-md-6 mb-4 white-text text-center text-md-left">
-              <h1 class="display-4 font-weight-bold">
-                EZ-CHARTS
-              </h1>
-
-              <hr class="hr-light" />
-
-              <p><strong>A simple and elegant way to display data</strong></p>
-
-              <p class="mb-4 d-none d-md-block">
-                <strong
-                  >Not a member? You can still view public charts by clicking the button below
-                </strong>
-              </p>
-
-              <a
-                target="_blank"
-                href="./publiccharts.php"
-                class="btn btn-indigo btn-lg"
-                >Public Charts <i class="fa fa-graduation-cap ml-2"></i>
-              </a>
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-6 col-xl-5 mb-4">
-              <!-- Card -->
-              <div class="card">
-                <!-- Card content -->
-                <div class="card-body">
-                  <!-- Form -->
-                  <form name="login" method="POST" action="index.php">
-                    <!-- Heading -->
-                    <h3 class="dark-grey-text text-center">
-                      <strong>Existing user? Log in</strong>
-                    </h3>
-                    <hr />
-
-                    <div class="md-form">
-                      <i class="fa fa-user prefix grey-text"></i>
-                      <input type="text" id="form3" class="form-control" name="username"/>
-                      <label for="form3">User Name</label>
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+            <div class="card card-image" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/gradient1.jpg);">
+                <div class="text-white text-center py-5 px-4 my-5">
+                    <div>
+                    <h2 class="card-title h1-responsive pt-3 mb-5 font-bold"><strong>Create beautiful charts with EZ-CHARTS</strong></h2>
+                    <p class="mx-5 mb-5">You now have the graphing power of the universe at your fingertips. Use it wisely!
+                    </p>
+                    <a href="index.php" class="btn btn-outline-white btn-md"><i class="fa fa-clone left"></i>To Log In</a>
                     </div>
-                    <div class="md-form">
-                      <i class="fa fa-key prefix grey-text"></i>
-                      <input type="text" id="form2" class="form-control" name="password"/>
-                      <label for="form2">Password</label>
-                    </div>
-
-
-                    <div class="text-center">
-                      <button class="btn btn-indigo" type="submit">Sign In</button>
-                      <a href="register.php" class="btn btn-secondary btn-rounded" role="button">New User Sign Up</a>
-                      <hr />
-
-                    </div>
-                  </form>
-                  <!-- Form -->
                 </div>
-              </div>
-              <!-- /.Card -->
-            </div>
-            <!-- Grid column -->
-          </div>
-          <!-- Grid row -->
+            </div>            
         </div>
-        <!-- Content -->
-      </div>
-      <!-- Mask & flexbox options -->
     </div>
     <!-- Full Page Intro -->
 
