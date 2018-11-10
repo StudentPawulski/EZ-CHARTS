@@ -1,13 +1,13 @@
-[![Material Design for Bootstrap](https://mdbootstrap.com/wp-content/uploads/2018/03/landing-page.jpg)](https://mdbootstrap.com/freebies/landing-page-template/)
+[![Material Design for Bootstrap](https://mdbootstrap.com/wp-content/uploads/2018/03/admin.jpg)](https://mdbootstrap.com/freebies/admin-dashboard-template/)
 
-# Bootstrap 4 & Material Design - Landing Page Template 
+# Bootstrap 4 & Material Design - Admin Template 
 
-Free, responsive Landing Page template containing stunning, full or half-page Intro, Call to Action Buttons, Forms, and many other crucial components. Built with the newest Bootstrap 4 and Material Design. MIT license – free for personal and commercial use.
+Free, responsive Admin Dashboard template containing different styles of dashboards, data presentations, and numerous insightful components. Built with the newest Bootstrap 4 and Material Design. MIT license – free for personal and commercial use.
 
 ________
 
 # Live Previews: 
-## https://mdbootstrap.com/freebies/landing-page-template/
+## https://mdbootstrap.com/freebies/admin-dashboard-template/
 
 # Most important features:
 
@@ -26,7 +26,7 @@ ________
 7. Detailed documentation
 
 # Demo:  
-**Main demo**: https://mdbootstrap.com/previews/free-templates/landing-page/form.html
+**Main demo**: https://mdbootstrap.com/previews/free-templates/admin/dashboard.html
 
 # MDB Quick Start (5 minutes):
 **Written Tutorial**: https://mdbootstrap.com/mdb-quick-start/
@@ -49,7 +49,7 @@ You can install MDBootstrap using NPM:
 
 # PRO version:
 
-**MDB Landing Page Template Pro (jQuery version)**: https://mdbootstrap.com/product/landing-page-theme/
+**MDB Admin Template Pro (jQuery version)**: https://mdbootstrap.com/product/admin-theme/
 
 # Highlights:  
 **Bootstrap 4**  
