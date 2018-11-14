@@ -63,8 +63,7 @@
         <!-- Brand -->
         <a
           class="navbar-brand"
-          href="https://mdbootstrap.com/material-design-for-bootstrap/"
-          target="_blank"
+          href="index.php"
         >
           <strong>EZ-CHARTS</strong>
         </a>
@@ -86,16 +85,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Left -->
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#"
-                >Home <span class="sr-only">(current)</span>
-              </a>
-            </li>
             <li class="nav-item">
               <a
                 class="nav-link"
-                href="https://mdbootstrap.com/material-design-for-bootstrap/"
-                target="_blank"
+                href="about.php"
                 >About EZ-CHARTS</a
               >
             </li>
@@ -130,7 +123,7 @@
     <!-- Full Page Intro -->
     <div
       class="view full-page-intro"
-      style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg'); background-repeat: no-repeat; background-size: cover;"
+      style="background-image: url('./img/charts.jpg'); background-repeat: no-repeat; background-size: cover;"
     >
       <!-- Mask & flexbox options -->
         <div class="mask rgba-black-light d-flex justify-content-center align-items-center">

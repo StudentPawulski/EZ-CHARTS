@@ -27,7 +27,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link waves-effect" href="
-                    <?php if (isset($_SESSION['userId'])) : ?>
+                    <?php if (isset($_SESSION['userid'])) : ?>
                         <?= 'dashboard.php' ?>
                     <?php else : ?>
                         <?= 'publiccharts.php' ?>
@@ -72,7 +72,7 @@
 <div class="sidebar-fixed position-fixed">
 
     <a class="logo-wrapper waves-effect">
-        <img src="https://mdbootstrap.com/img/logo/mdb-email.png" class="img-fluid" alt="">
+        <img src="img/EZ.png" class="img-fluid" alt="EZ-CHARTS LOGO">
     </a>
     <div class="list-group list-group-flush">
         
@@ -92,7 +92,7 @@
         <?php endif ?>
 
         <?php if (isset($_SESSION['userid'])) : ?>
-        <a href="#" class="list-group-item list-group-item-action waves-effect">
+        <a href="createchart.php" class="list-group-item list-group-item-action waves-effect">
             <i class="fa fa-table mr-3"></i>Create Chart</a>
         <?php endif ?>
     </div>

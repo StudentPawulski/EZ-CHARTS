@@ -1,12 +1,14 @@
 <?php
 
+require('./php/authenticate.php');
 require('./php/connect.php');
 
 if (isset($_GET['graphId'])) {
     $graphId = filter_var($_GET['graphId'], FILTER_SANITIZE_NUMBER_INT);
+    $userid = $_SESSION['userid'];
 }
 
-$query = "SELECT * FROM graphdata WHERE graphId = '$graphId' AND isPublic = 1";
+$query = "SELECT * FROM graphdata WHERE graphId = '$graphId' AND ownerId = '$userid'";
 $statement = $db->prepare($query); // Returns a PDOStatement object.
 $statement->execute(); // The query is now executed.
 $graphs = $statement->fetchAll();
@@ -78,6 +80,13 @@ $xaxis = [
         const xaxis_data = <?= json_encode($xaxis) ?>;
         const title_data = <?= json_encode($title) ?>;
     </script>
+        <STYLE type="text/css">
+        a:not([href]):not([tabindex]), a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
+            color: inherit;
+            text-decoration: none;
+            margin-left: 30px;
+        }
+    </STYLE>
 </head>
 
 <body class="grey lighten-3">
@@ -111,21 +120,24 @@ $xaxis = [
 
                 </div>
 
-                <div class="card mb-4 wow fadeIn">
+                
 
+            </div>
+
+            <div class="card mb-4 wow fadeIn">
 <!--Card content-->
                     <div class="card-body d-sm-flex justify-content-between">
                         <div class="container">
                             <div id="chart">
                                 <script src="js/chart.js"></script>
-                                <a href="publiccharts.php" class="btn btn-primary btn-rounded" role="button">Home</a>
+                                <a href="dashboard.php" class="btn btn-primary btn-rounded" role="button">Home</a>
+                                <a href="editchart.php?graphId=<?= $graphId ?>" class="btn btn-warning btn-rounded" role="button">Edit Chart</a>
+                                <a href="php/deletechart.php?graphId=<?= $graphId ?>" class="btn btn-danger btn-rounded" role="button">Delete Chart</a>                                
                             </div>
                         </div>
                     </div>
 
                 </div>
-
-            </div>
             <!-- Heading -->
 
            

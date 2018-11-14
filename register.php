@@ -129,6 +129,13 @@ function direct()
         }
       }
     </style>
+    <STYLE type="text/css">
+        a:not([href]):not([tabindex]), a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
+            color: inherit;
+            text-decoration: none;
+            margin-left: 30px;
+        }
+    </STYLE>
   </head>
 
   <body>
@@ -138,8 +145,7 @@ function direct()
         <!-- Brand -->
         <a
           class="navbar-brand"
-          href="https://mdbootstrap.com/material-design-for-bootstrap/"
-          target="_blank"
+          href="index.php"
         >
           <strong>EZ-CHARTS</strong>
         </a>
@@ -169,8 +175,7 @@ function direct()
             <li class="nav-item">
               <a
                 class="nav-link"
-                href="https://mdbootstrap.com/material-design-for-bootstrap/"
-                target="_blank"
+                href="about.php"
                 >About EZ-CHARTS</a
               >
             </li>
@@ -205,7 +210,7 @@ function direct()
     <!-- Full Page Intro -->
     <div
       class="view full-page-intro"
-      style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg'); background-repeat: no-repeat; background-size: cover;"
+      style="background-image: url('./img/charts.jpg'); background-repeat: no-repeat; background-size: cover;"
     >
       <!-- Mask & flexbox options -->
       <div

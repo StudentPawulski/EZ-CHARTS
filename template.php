@@ -20,6 +20,13 @@
     <link href="css/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="css/style.min.css" rel="stylesheet">
+    <STYLE type="text/css">
+        a:not([href]):not([tabindex]), a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
+            color: inherit;
+            text-decoration: none;
+            margin-left: 30px;
+        }
+    </STYLE>
 </head>
 
 <body class="grey lighten-3">

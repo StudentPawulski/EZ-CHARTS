@@ -1,11 +1,58 @@
 <?php
+
 require('./php/connect.php');
 
-$query = "SELECT graphId, title, type FROM graphdata WHERE isPublic = 1";
+if (isset($_GET['graphId'])) {
+    $graphId = filter_var($_GET['graphId'], FILTER_SANITIZE_NUMBER_INT);
+}
+
+$query = "SELECT * FROM graphdata WHERE graphId = '$graphId' AND isPublic = 1";
 $statement = $db->prepare($query); // Returns a PDOStatement object.
 $statement->execute(); // The query is now executed.
 $graphs = $statement->fetchAll();
+
+//echo print_r($graphs);
+
+$yAxisName = $graphs[0]['yAxisName'];
+$AxisName = $graphs[0]['yAxisName'];
+$title = $graphs[0]['title'];
+//echo print_r($graphs);
+
+$x_axis = []; //array_fill(1, 12, null);
+$y_axis = []; //array_fill(1, 12, null);
+
+for ($i = 1; $i < 13; $i++) {
+    if ($graphs[0]['yAxis' . $i] != null ||
+        $graphs[0]['xAxis' . $i] != null) {
+        $x_axis[] = $graphs[0]['xAxis' . $i];
+        $y_axis[] = (float)$graphs[0]['yAxis' . $i];
+    } else {
+        break;
+    }
+}
+
+//consider doing some sort of append when you are filling the array.
+
+$series = [
+    'name' => $yAxisName,
+    'data' => $y_axis
+];
+
+$title = [
+    'text' => $title,
+    'align' => 'center',
+    'margin' => 20,
+    'offsetY' => 20,
+    'style' => [
+        'fontSize' => '25px'
+    ]
+];
+$xaxis = [
+    'categories' => $x_axis
+];
+
 ?>
+
 
 
 
@@ -25,6 +72,19 @@ $graphs = $statement->fetchAll();
     <link href="css/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="css/style.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        const series_data = <?= json_encode($series) ?>;
+        const xaxis_data = <?= json_encode($xaxis) ?>;
+        const title_data = <?= json_encode($title) ?>;
+    </script>
+    <STYLE type="text/css">
+        a:not([href]):not([tabindex]), a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
+            color: inherit;
+            text-decoration: none;
+            margin-left: 30px;
+        }
+    </STYLE>
 </head>
 
 <body class="grey lighten-3">
@@ -58,53 +118,22 @@ $graphs = $statement->fetchAll();
 
                 </div>
 
+                <div class="card mb-4 wow fadeIn">
+
+<!--Card content-->
+                    <div class="card-body d-sm-flex justify-content-between">
+                        <div class="container">
+                            <div id="chart">
+                                <script src="js/chart.js"></script>
+                                <a href="publiccharts.php" class="btn btn-primary btn-rounded" role="button">Home</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
             <!-- Heading -->
-            <div class="row wow fadeIn">
-
-</div>
-<!--Grid column-->
-
-<!--Grid column-->
-<div class="col-md-3 mb-4">
-
-    <!--Card-->
-    <div class="card mb-4">
-
-        <!--Card content-->
-        <div class="card-body">
-
-            <!-- List group links -->
-            <div class="list-group list-group-flush">
-                
-                <?php foreach ($graphs as $graph) : ?>
-                      
-                  <a class="list-group-item list-group-item-action waves-effect" 
-                    href="publicviewchart.php?graphId=<?= $graph['graphId'] ?>">
-                    <?= $graph['title'] ?>
-                      <span class="badge badge-success badge-pill pull-right"><?= $graph['type'] ?>
-                      <?php if ($graph['type'] == 'bar') : ?>
-                        <i class="fa fa-bar-chart"></i>
-                      <?php elseif ($graph['type'] == 'line') : ?>
-                        <i class="fa fa-line-chart"></i>
-                      <?php endif ?>
-                      </span>
-                  </a>
-                        
-                <?php endforeach ?>
-
-            </div>
-            <!-- List group links -->
-
-        </div>
-
-    </div>
-    <!--/.Card-->
-
-</div>
-<!--Grid column-->
-
-</div>
 
            
         </div>

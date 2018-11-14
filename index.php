@@ -107,8 +107,8 @@ function direct()
         <!-- Brand -->
         <a
           class="navbar-brand"
-          href="https://mdbootstrap.com/material-design-for-bootstrap/"
-          target="_blank"
+          href="index.php"
+          
         >
           <strong>EZ-CHARTS</strong>
         </a>
@@ -130,15 +130,10 @@ function direct()
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Left -->
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#"
-                >Home <span class="sr-only">(current)</span>
-              </a>
-            </li>
             <li class="nav-item">
               <a
                 class="nav-link"
-                href="https://mdbootstrap.com/material-design-for-bootstrap/"
+                href="about.php"
                 target="_blank"
                 >About EZ-CHARTS</a
               >
@@ -174,7 +169,7 @@ function direct()
     <!-- Full Page Intro -->
     <div
       class="view full-page-intro"
-      style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg'); background-repeat: no-repeat; background-size: cover;"
+      style="background-image: url('./img/charts.jpg'); background-repeat: no-repeat; background-size: cover;"
     >
       <!-- Mask & flexbox options -->
       <div
@@ -230,7 +225,7 @@ function direct()
                     </div>
                     <div class="md-form">
                       <i class="fa fa-key prefix grey-text"></i>
-                      <input type="text" id="form2" class="form-control" name="password"/>
+                      <input type="password" id="form2" class="form-control" name="password"/>
                       <label for="form2">Password</label>
                     </div>
 
