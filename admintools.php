@@ -1,14 +1,22 @@
 <?php
 require('./php/authenticate.php');
+require('./php/adminauth.php');
 require('./php/connect.php');
 
 if (isset($_SESSION['userid'])) {
     $ownerId = $_SESSION['userid'];
 
-    $query = "SELECT graphId, title, type FROM graphdata WHERE ownerId = '$ownerId'";
+    $query = "SELECT graphId, title, username, type FROM graphdata, userdata where ownerId = userId";
     $statement = $db->prepare($query); // Returns a PDOStatement object.
     $statement->execute(); // The query is now executed.
     $graphs = $statement->fetchAll();
+
+
+    $query = "SELECT userId, username, email ,photo FROM userdata";
+    $statement = $db->prepare($query); // Returns a PDOStatement object.
+    $statement->execute(); // The query is now executed.
+    $users = $statement->fetchAll();
+
 }
 
 ?>
@@ -52,7 +60,7 @@ if (isset($_SESSION['userid'])) {
 
             <!-- Heading -->
             <div class="card mb-4 wow fadeIn">
-
+            
                 <!--Card content-->
                 <div class="card-body d-sm-flex justify-content-between">
 
@@ -79,12 +87,8 @@ if (isset($_SESSION['userid'])) {
             <div class="row wow fadeIn">
 
 
-                </div>
-                <!--Grid column-->
-
                 <!--Grid column-->
                 <div class="col-md-3 mb-4">
-
 
                     <!--Card-->
                     <div class="card mb-4">
@@ -94,14 +98,15 @@ if (isset($_SESSION['userid'])) {
 
                             <!-- List group links -->
                             <div class="list-group list-group-flush">
-
+                                
+                                <h1>Charts</h1>
 
                                 <?php if (isset($_SESSION['userid'])) : ?>
                                     <?php foreach ($graphs as $graph) : ?>
                                       
                                             <a class="list-group-item list-group-item-action waves-effect" 
                                                 href="viewchart.php?graphId=<?= $graph['graphId'] ?>">
-                                                <?= $graph['title'] ?>
+                                                <?= 'Chart Owner: ' . $graph['username'] ?>
                                                 <span class="badge badge-success badge-pill pull-right"><?= $graph['type'] ?>
                                                 <?php if ($graph['type'] == 'bar') : ?>
                                                     <i class="fa fa-bar-chart"></i>
@@ -109,6 +114,7 @@ if (isset($_SESSION['userid'])) {
                                                     <i class="fa fa-line-chart"></i>
                                                 <?php endif ?>
                                                 </span>
+                                                <h6><?= 'Chart title: ' . $graph['title'] ?></h6>
                                             </a>
                                         
                                     <?php endforeach ?>
@@ -126,37 +132,46 @@ if (isset($_SESSION['userid'])) {
                 </div>
                 <!--Grid column-->
 
-            </div>
-            <!--Grid row-->
 
-            <!--Grid row-->
-            <div class="row wow fadeIn">
+
+
+                <div class="col-md-6 mb-6">
+                <div class="card mb-5">
+
+                    <!--Card content-->
+                    <div class="card-body">
+                    
+                        <!-- List group links -->
+                        <div class="list-group list-group-flush">
+                        <h1>Users</h1>
+
+                            <?php if (isset($_SESSION['userid'])) : ?>
+                                <?php foreach ($users as $user) : ?>
+                                
+                                        <a class="list-group-item list-group-item-action waves-effect" 
+                                            href="edituser.php?userId=<?= $user['userId'] ?>">
+                                            <?= 'User Name: ' . $user['username'] ?>                                            
+                                            <h6><?= 'User Id: ' . $user['userId'] ?></h6>
+                                            <h6><?= 'Email: ' . $user['email'] ?></h6>
+                                            <h6><?= 'photo: ' . $user['photo'] ?></h6>
+                                        </a>
+                                    
+                                <?php endforeach ?>
+                            <?php endif ?>
+
+
+                        </div>
+                        <!-- List group links -->
+
+                    </div>
+
+                </div>
+                    <!--/.Card-->
 
             
             </div>
             <!--Grid row-->
-
-            <!--Grid row-->
-            <div class="row wow fadeIn">
-
-
-                <!--Grid column-->
-
-
-                <!--Grid column-->
-
-
-
-            </div>
-            <!--Grid row-->
-
-            <!--Grid row-->
-            <div class="row wow fadeIn">
-
-                
-            </div>
-            <!--Grid row-->
-
+        </div>
         </div>
     </main>
     <!--Main layout-->

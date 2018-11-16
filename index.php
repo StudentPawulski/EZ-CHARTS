@@ -29,7 +29,9 @@ if ($username_from_post != null && $password_from_post != null) {
       session_start();
       $_SESSION['userid'] = $user['userid'];
       $_SESSION['username'] = $user['username'];
-      $_SESSION['isAdmin'] = $user['isAdmin'];
+      if ($user['isAdmin'] == 1) {
+        $_SESSION['isAdmin'] = true;
+      }
       direct();
     } else {
       echo 'Incorrect password. Log in attempt failed';

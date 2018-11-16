@@ -4,7 +4,7 @@ require('connect.php');
 
 function direct()
 {
-    header('Location: http://localhost:31337/webproject/project/home.php');
+    header('Location: http://localhost:31337/webproject/dashboard.php');
     exit;
 }
 
@@ -17,8 +17,6 @@ $query = "DELETE FROM graphdata
             WHERE graphId = $graphId";
 $statement = $db->prepare($query); // Returns a PDOStatement object.
 $statement->execute(); // The query is now executed.
-
-echo $query;
 
 direct();
 ?>

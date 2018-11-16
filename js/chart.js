@@ -3,7 +3,7 @@ const options = {
   chart: {
     height: 450,
     width: "100%",
-    type: "bar",
+    type: type,
     background: "#f4f4f4",
     foreColor: "#333"
   },

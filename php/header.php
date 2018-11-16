@@ -76,24 +76,28 @@
     </a>
     <div class="list-group list-group-flush">
         
-        <a href="#" class="list-group-item active waves-effect">
-            <i class="fa fa-pie-chart mr-3"></i>Dashboard
-        </a>
+        <a href="#" class="list-group-item list-group-item-action waves-effect">
+            <i class="fa fa-pie-chart mr-3"></i>Dashboard</a>
         <?php if (isset($_SESSION['userid'])) : ?>
             <a href="#" class="list-group-item list-group-item-action waves-effect">
                 <i class="fa fa-user mr-3"></i>Profile</a>
         <?php endif ?>
 
-        <?php if (isset($_SESSION['isadmin'])) : ?>
-            <?php if ($_SESSION['isadmin'] === 1) : ?>
-            <a href="#" class="list-group-item list-group-item-action waves-effect">
-                <i class="fa fa-user-plus"></i>Admin Tools</a>
+        <?php if (isset($_SESSION['isAdmin'])) : ?>
+            <?php if ($_SESSION['isAdmin'] == true) : ?>
+            <a href="admintools.php" class="list-group-item list-group-item-action waves-effect">
+                <i class="fa fa-user-plus mr-3"></i>Admin Tools</a>
                 <?php endif ?>
         <?php endif ?>
 
         <?php if (isset($_SESSION['userid'])) : ?>
         <a href="createchart.php" class="list-group-item list-group-item-action waves-effect">
             <i class="fa fa-table mr-3"></i>Create Chart</a>
+        <?php endif ?>
+
+        <?php if (isset($_SESSION['userid'])) : ?>
+        <a href="php/logout.php" class="list-group-item list-group-item-action waves-effect">
+            <i class="fa fa-sign-out mr-3"></i>Log Out</a>
         <?php endif ?>
     </div>
 

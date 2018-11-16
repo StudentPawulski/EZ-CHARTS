@@ -14,7 +14,7 @@ $statement->execute(); // The query is now executed.
 $graphs = $statement->fetchAll();
 
 //echo print_r($graphs);
-
+$type = $graphs[0]['type'];
 $yAxisName = $graphs[0]['yAxisName'];
 $AxisName = $graphs[0]['yAxisName'];
 $title = $graphs[0]['title'];
@@ -79,6 +79,7 @@ $xaxis = [
         const series_data = <?= json_encode($series) ?>;
         const xaxis_data = <?= json_encode($xaxis) ?>;
         const title_data = <?= json_encode($title) ?>;
+        const type = <?= json_encode($type) ?>;
     </script>
         <STYLE type="text/css">
         a:not([href]):not([tabindex]), a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
