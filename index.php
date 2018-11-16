@@ -1,5 +1,5 @@
 <?php
-require('.\php\connect.php');
+require('./php/connect.php');
 $username_from_post = '';
 $password_from_post = '';
 
