@@ -87,18 +87,18 @@ $xaxis = [
             text-decoration: none;
             margin-left: 30px;
         }
-        ul {
+        ul.viewul {
             list-style-type: none;
             margin: 0;
             padding: 0;
             overflow: hidden;
         }
 
-        li {
+        li.viewli {
             float: left;
         }
 
-        li a {
+        li a.button {
             display: block;
             padding: 8px;            
         }
@@ -149,10 +149,10 @@ $xaxis = [
                             </div>
                         </div>                        
                     </div>
-                    <ul id='inline'>
-                    <li><a href="dashboard.php" class="btn btn-primary" role="button" style="display:inline-block;width:200px">Home</a></li>
-                    <li><a href="editchart.php?graphId=<?= $graphId ?>" class="btn btn-warning" role="button" style="display:inline-block;width:200px">Edit Chart</a></li>
-                    <li><a href="php/deletechart.php?graphId=<?= $graphId ?>" class="btn btn-danger" role="button" style="display:inline-block;width:200px">Delete Chart</a></li> 
+                    <ul class="viewul" id='inline'>
+                    <li class="viewli"><a href="dashboard.php" class="btn btn-primary" role="button" style="display:inline-block;width:200px">Home</a></li>
+                    <li class="viewli"><a href="editchart.php?graphId=<?= $graphId ?>" class="btn btn-warning" role="button" style="display:inline-block;width:200px">Edit Chart</a></li>
+                    <li class="viewli"><a href="php/deletechart.php?graphId=<?= $graphId ?>" class="btn btn-danger" role="button" style="display:inline-block;width:200px">Delete Chart</a></li> 
                     </ul>
                 </div>
             <!-- Heading -->
