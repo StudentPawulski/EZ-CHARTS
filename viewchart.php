@@ -87,6 +87,12 @@ $xaxis = [
             text-decoration: none;
             margin-left: 30px;
         }
+        .inline{
+            
+        }
+        #inline{
+
+        }
     </STYLE>
 </head>
 
@@ -134,9 +140,11 @@ $xaxis = [
                             </div>
                         </div>                        
                     </div>
-                    <a href="dashboard.php" class="btn btn-primary" role="button" style="display:inline-block;width:200px">Home</a>
-                    <a href="editchart.php?graphId=<?= $graphId ?>" class="btn btn-warning" role="button" style="display:inline-block;width:200px">Edit Chart</a>
-                    <a href="php/deletechart.php?graphId=<?= $graphId ?>" class="btn btn-danger" role="button" style="display:inline-block;width:200px">Delete Chart</a> 
+                    <ul id='inline'>
+                    <li><a href="dashboard.php" class="btn btn-primary" role="button" style="display:inline-block;width:200px">Home</a></li>
+                    <li><a href="editchart.php?graphId=<?= $graphId ?>" class="btn btn-warning" role="button" style="display:inline-block;width:200px">Edit Chart</a></li>
+                    <li><a href="php/deletechart.php?graphId=<?= $graphId ?>" class="btn btn-danger" role="button" style="display:inline-block;width:200px">Delete Chart</a></li> 
+                    </ul>
                 </div>
             <!-- Heading -->
 
