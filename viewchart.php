@@ -87,11 +87,20 @@ $xaxis = [
             text-decoration: none;
             margin-left: 30px;
         }
-        .inline{
-            
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
         }
-        #inline{
 
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            padding: 8px;            
         }
     </STYLE>
 </head>
