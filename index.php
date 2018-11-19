@@ -234,7 +234,7 @@ function direct()
 
                     <div class="text-center">
                       <button class="btn btn-indigo" type="submit">Sign In</button>
-                      <a href="register.php" class="btn btn-secondary btn-rounded" role="button">New User Sign Up</a>
+                      <a href="register.php" class="btn btn-secondary" role="button">New User Sign Up</a>
                       <hr />
 
                     </div>

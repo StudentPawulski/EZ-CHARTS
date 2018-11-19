@@ -77,6 +77,7 @@ $xaxis = [
         const series_data = <?= json_encode($series) ?>;
         const xaxis_data = <?= json_encode($xaxis) ?>;
         const title_data = <?= json_encode($title) ?>;
+        const type = <?= json_encode($type) ?>;
     </script>
     <STYLE type="text/css">
         a:not([href]):not([tabindex]), a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
@@ -125,7 +126,7 @@ $xaxis = [
                         <div class="container">
                             <div id="chart">
                                 <script src="js/chart.js"></script>
-                                <a href="publiccharts.php" class="btn btn-primary btn-rounded" role="button">Home</a>
+                                <a href="publiccharts.php" class="btn btn-primary" role="button">Home</a>
                             </div>
                         </div>
                     </div>

@@ -131,9 +131,9 @@ $xaxis = [
                         <div class="container">
                             <div id="chart">
                                 <script src="js/chart.js"></script>
-                                <a href="dashboard.php" class="btn btn-primary btn-rounded" role="button">Home</a>
-                                <a href="editchart.php?graphId=<?= $graphId ?>" class="btn btn-warning btn-rounded" role="button">Edit Chart</a>
-                                <a href="php/deletechart.php?graphId=<?= $graphId ?>" class="btn btn-danger btn-rounded" role="button">Delete Chart</a>                                
+                                <a href="dashboard.php" class="btn btn-primary" role="button">Home</a>
+                                <a href="editchart.php?graphId=<?= $graphId ?>" class="btn btn-warning" role="button">Edit Chart</a>
+                                <a href="php/deletechart.php?graphId=<?= $graphId ?>" class="btn btn-danger" role="button">Delete Chart</a>                              
                             </div>
                         </div>
                     </div>
