@@ -134,9 +134,9 @@ $xaxis = [
                             </div>
                         </div>                        
                     </div>
-                    <a href="dashboard.php" class="btn btn-primary" role="button">Home</a>
-                                <a href="editchart.php?graphId=<?= $graphId ?>" class="btn btn-warning" role="button">Edit Chart</a>
-                                <a href="php/deletechart.php?graphId=<?= $graphId ?>" class="btn btn-danger" role="button">Delete Chart</a> 
+                    <a href="dashboard.php" class="btn btn-primary" role="button" style="display:block;width:200px">Home</a>
+                    <a href="editchart.php?graphId=<?= $graphId ?>" class="btn btn-warning" role="button" style="display:block;width:200px">Edit Chart</a>
+                    <a href="php/deletechart.php?graphId=<?= $graphId ?>" class="btn btn-danger" role="button" style="display:block;width:200px">Delete Chart</a> 
                 </div>
             <!-- Heading -->
 
