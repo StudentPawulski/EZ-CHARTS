@@ -221,16 +221,15 @@ function direct()
                     </h3>
                     <hr />
 
-                    <div class="md-form">
-                      <i class="fa fa-user prefix grey-text"></i>
+                    
+                      
                       <input type="text" id="form3" class="form-control" name="username"/>
                       <label for="form3">User Name</label>
-                    </div>
-                    <div class="md-form">
-                      <i class="fa fa-key prefix grey-text"></i>
+                    
+                      
                       <input type="password" id="form2" class="form-control" name="password"/>
                       <label for="form2">Password</label>
-                    </div>
+                    
 
 
                     <div class="text-center">
