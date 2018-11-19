@@ -11,11 +11,11 @@
         <div class="pb-4">
 
             <a href="https://twitter.com/chartsez" target="_blank">
-                <i class="fa fa-twitter mr-3"></i>
+            <i class="fab fa-twitter"></i>
             </a>
 
             <a href="https://github.com/StudentPawulski/EZ-CHARTS" target="_blank">
-                <i class="fa fa-github mr-3"></i>
+            <i class="fab fa-github"></i>
             </a>
         </div>
         <!-- Social icons -->
