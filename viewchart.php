@@ -127,19 +127,16 @@ $xaxis = [
 
             <div class="card mb-4 wow fadeIn">
 <!--Card content-->
-                    
+                    <div class="card-body d-sm-flex justify-content-between">
                         <div class="container">
                             <div id="chart">
-                                <script src="js/chart.js"></script>
-                                <button href="dashboard.php" type="button" class="btn btn-primary">Home</button>
-                                <button href="editchart.php?graphId=<?= $graphId ?>" type="button" class="btn btn-warning">Edit Chart</button>
-                                <button href="php/deletechart.php?graphId=<?= $graphId ?>" type="button" class="btn btn-danger">Delete Chart</button>
-                                <a href="dashboard.php" class="btn btn-primary" role="button">Home</a>
-                                <a href="editchart.php?graphId=<?= $graphId ?>" class="btn btn-warning" role="button">Edit Chart</a>
-                                <a href="php/deletechart.php?graphId=<?= $graphId ?>" class="btn btn-danger" role="button">Delete Chart</a>                              
+                                <script src="js/chart.js"></script>                             
                             </div>
                         </div>
-                    
+                        <a href="dashboard.php" class="btn btn-primary" role="button">Home</a>
+                                <a href="editchart.php?graphId=<?= $graphId ?>" class="btn btn-warning" role="button">Edit Chart</a>
+                                <a href="php/deletechart.php?graphId=<?= $graphId ?>" class="btn btn-danger" role="button">Delete Chart</a> 
+                    </div>
 
                 </div>
             <!-- Heading -->
