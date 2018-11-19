@@ -49,7 +49,7 @@
                 class="nav-link"
                 target="_blank"
               >
-              <i class="fab fa-twitter"></i>
+              <i class="fab fa-twitter mr-3"></i>
               </a>
             </li>
             <li class="nav-item">
@@ -58,7 +58,7 @@
                 class="nav-link border border-light rounded"
                 target="_blank"
               >
-              <i class="fab fa-github"></i>EZ-CHARTS GitHub
+              <i class="fab fa-github mr-3"></i>EZ-CHARTS GitHub
               </a>
             </li>
           </ul>
@@ -77,7 +77,7 @@
     <div class="list-group list-group-flush">
         
         <a href="#" class="list-group-item list-group-item-action waves-effect">
-            <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+            <i class="fas fa-tachometer-alt mr-3"></i>Dashboard</a>
         <?php if (isset($_SESSION['userid'])) : ?>
             <a href="#" class="list-group-item list-group-item-action waves-effect">
                 <i class="fa fa-user mr-3"></i>Profile</a>
@@ -97,7 +97,7 @@
 
         <?php if (isset($_SESSION['userid'])) : ?>
         <a href="php/logout.php" class="list-group-item list-group-item-action waves-effect">
-        <i class="fas fa-sign-out-alt"></i>Log Out</a>
+        <i class="fas fa-sign-out-alt mr-3"></i>Log Out</a>
         <?php endif ?>
     </div>
 
