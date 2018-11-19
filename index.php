@@ -151,7 +151,7 @@ function direct()
                 class="nav-link"
                 target="_blank"
               >
-                <i class="fa fa-twitter"></i>
+              <i class="fab fa-twitter"></i>
               </a>
             </li>
             <li class="nav-item">
@@ -160,7 +160,7 @@ function direct()
                 class="nav-link border border-light rounded"
                 target="_blank"
               >
-                <i class="fa fa-github mr-2"></i>EZ-CHARTS GitHub
+                <i class="fab fa-github mr-2"></i>EZ-CHARTS GitHub
               </a>
             </li>
           </ul>
@@ -217,7 +217,7 @@ function direct()
                   <form name="login" method="POST" action="index.php">
                     <!-- Heading -->
                     <h3 class="dark-grey-text text-center">
-                      <strong>Existing user? Log in</strong>
+                      <strong>Sign In</strong>
                     </h3>
                     <hr />
 
