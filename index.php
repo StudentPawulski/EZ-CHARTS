@@ -221,11 +221,11 @@ function direct()
                         <form name="login" method="POST" action="index.php" class="md-form" style="color: #757575;">      
                         
                           <input type="text" id="materialLoginFormEmail" class="form-control" name="username"/>
-                          <label for="form3">User Name</label>
+                          <label for="materialLoginFormEmail">User Name</label>
                         
                           
                           <input type="password" id="materialLoginFormPassword" class="form-control" name="password"/>
-                          <label for="form2">Password</label>
+                          <label for="materialLoginFormPassword">Password</label>
                         
                           <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
 
