@@ -49,7 +49,7 @@
                 class="nav-link"
                 target="_blank"
               >
-                <i class="fa fa-twitter"></i>
+                <i class="fas fa-twitter"></i>
               </a>
             </li>
             <li class="nav-item">
@@ -58,7 +58,7 @@
                 class="nav-link border border-light rounded"
                 target="_blank"
               >
-                <i class="fa fa-github mr-2"></i>EZ-CHARTS GitHub
+                <i class="fas fa-github mr-2"></i>EZ-CHARTS GitHub
               </a>
             </li>
           </ul>
@@ -77,27 +77,27 @@
     <div class="list-group list-group-flush">
         
         <a href="#" class="list-group-item list-group-item-action waves-effect">
-            <i class="fa fa-pie-chart mr-3"></i>Dashboard</a>
+            <i class="fas fa-pie-chart mr-3"></i>Dashboard</a>
         <?php if (isset($_SESSION['userid'])) : ?>
             <a href="#" class="list-group-item list-group-item-action waves-effect">
-                <i class="fa fa-user mr-3"></i>Profile</a>
+                <i class="fas fa-user mr-3"></i>Profile</a>
         <?php endif ?>
 
         <?php if (isset($_SESSION['isAdmin'])) : ?>
             <?php if ($_SESSION['isAdmin'] == true) : ?>
             <a href="admintools.php" class="list-group-item list-group-item-action waves-effect">
-                <i class="fa fa-user-plus mr-3"></i>Admin Tools</a>
+                <i class="fas fa-user-plus mr-3"></i>Admin Tools</a>
                 <?php endif ?>
         <?php endif ?>
 
         <?php if (isset($_SESSION['userid'])) : ?>
         <a href="createchart.php" class="list-group-item list-group-item-action waves-effect">
-            <i class="fa fa-table mr-3"></i>Create Chart</a>
+            <i class="fas fa-table mr-3"></i>Create Chart</a>
         <?php endif ?>
 
         <?php if (isset($_SESSION['userid'])) : ?>
         <a href="php/logout.php" class="list-group-item list-group-item-action waves-effect">
-            <i class="fa fa-sign-out mr-3"></i>Log Out</a>
+            <i class="fas fa-sign-out mr-3"></i>Log Out</a>
         <?php endif ?>
     </div>
 
