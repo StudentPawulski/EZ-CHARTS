@@ -127,7 +127,7 @@ $xaxis = [
 
             <div class="card mb-4 wow fadeIn">
 <!--Card content-->
-                    <div class="card-body d-sm-flex justify-content-between">
+                    
                         <div class="container">
                             <div id="chart">
                                 <script src="js/chart.js"></script>
@@ -139,7 +139,7 @@ $xaxis = [
                                 <a href="php/deletechart.php?graphId=<?= $graphId ?>" class="btn btn-danger" role="button">Delete Chart</a>                              
                             </div>
                         </div>
-                    </div>
+                    
 
                 </div>
             <!-- Heading -->
