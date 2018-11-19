@@ -210,39 +210,35 @@ function direct()
             <!-- Grid column -->
             <div class="col-md-6 col-xl-5 mb-4">
               <!-- Card -->
-              <div class="card">
-                <!-- Card content -->
-                <div class="card-body">
-                  <!-- Form -->
-                  <form name="login" method="POST" action="index.php">
-                    <!-- Heading -->
-                    <h3 class="dark-grey-text text-center">
-                      <strong>Existing user? Log in</strong>
-                    </h3>
-                    <hr />
+                <div class="card">
 
-                    
-                      
-                      <input type="text" id="form3" class="form-control" name="username"/>
-                      <label for="form3">User Name</label>
-                    
-                      
-                      <input type="password" id="form2" class="form-control" name="password"/>
-                      <label for="form2">Password</label>
-                    
+                  <h5 class="card-header info-color white-text text-center py-4">
+                    <strong>Sign in</strong>
+                  </h5>
 
+                    <div class="card-body px-lg-5 pt-0">
 
-                    <div class="text-center">
-                      <button class="btn btn-indigo" type="submit">Sign In</button>
-                      <a href="register.php" class="btn btn-secondary" role="button">New User Sign Up</a>
-                      <hr />
+                        <form name="login" method="POST" action="index.php" class="md-form" style="color: #757575;">      
+                        
+                          <input type="text" id="materialLoginFormEmail" class="form-control" name="username"/>
+                          <label for="form3">User Name</label>
+                        
+                          
+                          <input type="password" id="materialLoginFormPassword" class="form-control" name="password"/>
+                          <label for="form2">Password</label>
+                        
+                          <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
 
+                          <div class="text-center">
+                            <p>Not a member?
+                              <a href="register.php">Register</a>
+                            </p>
+                          </div>
+                        </form>
+                    <!-- Form -->
                     </div>
-                  </form>
-                  <!-- Form -->
                 </div>
-              </div>
-              <!-- /.Card -->
+                <!-- /.Card -->
             </div>
             <!-- Grid column -->
           </div>
