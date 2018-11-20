@@ -5,7 +5,7 @@ require('./php/connect.php');
 if (isset($_SESSION['userid'])) {
     $ownerId = $_SESSION['userid'];
 
-    $query = "SELECT graphId, title, type FROM graphdata WHERE ownerId = '$ownerId'";
+    $query = "SELECT graphId, title, type , xAxisName, yAxisName FROM graphdata WHERE ownerId = '$ownerId'";
     $statement = $db->prepare($query); // Returns a PDOStatement object.
     $statement->execute(); // The query is now executed.
     $graphs = $statement->fetchAll();
