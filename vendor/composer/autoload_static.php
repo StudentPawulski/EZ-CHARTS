@@ -6,6 +6,20 @@ namespace Composer\Autoload;
 
 class ComposerStaticInite1f092087da898ecb0e0b4764fb80cf7
 {
+    public static $prefixLengthsPsr4 = array (
+        'G' => 
+        array (
+            'Gumlet\\' => 7,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Gumlet\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gumlet/php-image-resize/lib',
+        ),
+    );
+
     public static $prefixesPsr0 = array (
         'M' => 
         array (
@@ -19,6 +33,8 @@ class ComposerStaticInite1f092087da898ecb0e0b4764fb80cf7
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInite1f092087da898ecb0e0b4764fb80cf7::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInite1f092087da898ecb0e0b4764fb80cf7::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInite1f092087da898ecb0e0b4764fb80cf7::$prefixesPsr0;
 
         }, null, ClassLoader::class);
