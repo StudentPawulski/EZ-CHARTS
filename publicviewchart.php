@@ -12,7 +12,7 @@ $statement->execute(); // The query is now executed.
 $graphs = $statement->fetchAll();
 
 //echo print_r($graphs);
-
+$type = $graphs[0]['type'];
 $yAxisName = $graphs[0]['yAxisName'];
 $AxisName = $graphs[0]['yAxisName'];
 $title = $graphs[0]['title'];
