@@ -66,8 +66,7 @@ if (isset($_SESSION['userid'])) {
                 <div class="card-body d-sm-flex justify-content-between">
 
                     <h4 class="mb-2 mb-sm-0 pt-1">
-                        <span>Dashboard</span>
-                        <?php print_r($_SESSION) ?>
+                        <span>Dashboard</span>                        
                     </h4>
 
                     <form class="d-flex justify-content-center">
