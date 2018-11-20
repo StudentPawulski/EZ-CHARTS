@@ -101,7 +101,7 @@ if (isset($_SESSION['userid'])) {
                                     <?php foreach ($graphs as $graph) : ?>
                                       
                                             <a class="list-group-item list-group-item-action waves-effect" 
-                                                href="viewchart.php?graphId=<?= $graph['graphId'] ?>">
+                                                href="viewchart.php?graphId=<?= $graph['graphId'] ?>&p=<?= $graph['xAxisName'] ?>&l=<?= $graph['yAxisName'] ?>">
                                                 <?= $graph['title'] ?>
                                                 <span class="badge badge-success badge-pill pull-right"><?= $graph['type'] ?>
                                                 <?php if ($graph['type'] == 'bar') : ?>
