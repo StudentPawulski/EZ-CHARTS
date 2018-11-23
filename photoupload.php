@@ -86,9 +86,13 @@ function direct()
                     <h3 class="dark-grey-text text-center">
                       <strong>Upload Profile Photo</strong>
                     </h3>
-                    <label for='image'>Image Filename:</label>
-                    <input type='file' name='image' id='image'>
-                    <input type='submit' name='submit' value='Upload Image'>
+                    <div class="md-form">
+                        <label for='image'>Image Filename:</label>
+                        <input type='file' name='image' id='image' class="form-control">
+                    </div>
+                    <div class="md-form">
+                        <input type='submit' name='submit' value='Upload Image'>
+                    </div>
                 </form>
                 
                 <?php if ($upload_error_detected) : ?>
