@@ -9,7 +9,6 @@ if ($_GET['graphId'] != null) {
     $graphId = filter_var($_GET['graphId'], FILTER_SANITIZE_NUMBER_INT);
     $_SESSION['graphId'] = $graphId;
     $userid = $_SESSION['userid'];
-    echo 'cats';
 }
 
 if ($_POST) {
@@ -62,7 +61,7 @@ if ($_POST) {
         }
     }
 
-    echo $title_from_post . $type_from_post . $x_axis_name_from_post . $y_axis_name_from_post . $x_axis_from_post[1] . $y_axis_from_post[1];
+    // $title_from_post . $type_from_post . $x_axis_name_from_post . $y_axis_name_from_post . $x_axis_from_post[1] . $y_axis_from_post[1];
 
 
     if ($title_from_post != null &&
@@ -141,7 +140,6 @@ if ($_POST) {
         $statement->bindValue(':yAxis12', $y_axis[12]);
     // Execute the INSERT.
         $statement->execute();
-        echo $query;
         direct();
     } else {
         echo '<script language="javascript">';

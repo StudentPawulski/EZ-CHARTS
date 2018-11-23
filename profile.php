@@ -1,9 +1,13 @@
 <?php
 require('./php/authenticate.php');
 require('./php/connect.php');
+
+$userId = $_SESSION['userId'];
+$query = "SELECT username, email FROM userdata WHERE userId = $userId";
+$statement = $db->prepare($query); // Returns a PDOStatement object.
+$statement->execute(); // The query is now executed.
+$graphs = $statement->fetchAll();
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,14 +54,13 @@ require('./php/connect.php');
                     <h4 class="mb-2 mb-sm-0 pt-1">
                         <span>Profile</span>
                     </h4>
-
-                    
+                    <h6>User Name: <?= ?></h6>
+                    <h6>Email: <?= ?></h6>                    
 
                 </div>
 
             </div>
             <!-- Heading -->
-
            
         </div>
     </main>
@@ -79,10 +82,6 @@ require('./php/connect.php');
         // Animations initialization
         new WOW().init();
     </script>
-
-
-
-
 
 </body>
 
