@@ -78,11 +78,11 @@ $photo = $profile['photo'];
                     <h6>Email: <?= $email ?></h6>
 
                     <?php if ($photo == null) : ?>
-                        <li class="viewli"><a href="photoupload.php" class="btn btn-warning" role="button" style="display:inline-block;width:200px">Upload Profile Pic</a></li>
+                        <li class="viewli"><a href="photoupload.php" class="btn btn-warning" role="button" >Upload Profile Pic</a></li>
                     <?php else : ?>
                         <img src="<?= $photo ?>" alt="Profile Picture">
                     <?php endif ?>                    
-                        <li class="viewli"><a href="dashboard.php" class="btn btn-primary" role="button" style="display:inline-block;width:200px">Home</a></li>
+                        <li class="viewli"><a href="dashboard.php" class="btn btn-primary" role="button" >Home</a></li>
                 </div>
 
             </div>
