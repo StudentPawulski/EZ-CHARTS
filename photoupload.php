@@ -61,16 +61,10 @@ if ($image_upload_detected) {
             imageSize($new_image_path, 50, $file[0] . '_thumbnail.' . $file[1]);
             imageSize($new_image_path, 20, $file[0] . '_fa.' . $file[1]);
 
-            //$new_image_path = str_replace('.' . $file[1], '', $new_image_path);
 
-            //$new_image_path = $new_image_path . '_thumbnail.' . $file[1];
             $photo = './uploads/' . $file[0] . '_thumbnail.' . $file[1];
-            //$photo = $new_image_path;
-
             $photo = str_replace("\\", "/", $photo);
 
-
-            //$photo = $image_filename;//$file[1];//$new_image_path;// . '_medium.' . $file[1];
             $photo1 = $new_image_path;
             $photo2 = $file[0];
             $photo3 = $file[1];
@@ -85,7 +79,7 @@ if ($image_upload_detected) {
     // Execute the INSERT.
             $statement->execute();
 
-            //direct();
+            direct();
         }
     }
 }
@@ -158,38 +152,11 @@ function direct()
                       <strong>Upload Profile Photo</strong>
                     </h3>
 
-                    <h3 class="dark-grey-text text-center">
-                      <strong><?= $photo ?></strong>
-                    </h3>
-                    <h3 class="dark-grey-text text-center">
-                      <strong><?= $photo1 ?></strong>
-                    </h3>
-                    <h3 class="dark-grey-text text-center">
-                      <strong><?= $photo2 ?></strong>
-                    </h3>
-                    <h3 class="dark-grey-text text-center">
-                      <strong><?= $photo3 ?></strong>
-                    </h3>
-
-
                     <label for='image'>Image Filename:</label>
                     <input type='file' name='image' id='image'>
                     <input type='submit' name='submit' value='Upload Image'>
                 </form>
-                
-                <?php if ($upload_error_detected) : ?>
-
-                    <p>Error Number: <?= $_FILES['image']['error'] ?></p>
-
-                <?php elseif ($image_upload_detected) : ?>
-
-                    <p>Client-Side Filename: <?= $_FILES['image']['name'] ?></p>
-                    <p>Apparent Mime Type:   <?= $_FILES['image']['type'] ?></p>
-                    <p>Size in Bytes:        <?= $_FILES['image']['size'] ?></p>
-                    <p>Temporary Path:       <?= $_FILES['image']['tmp_name'] ?></p>
-
-                <?php endif ?>
-                  
+                                 
               </div>
             </div>
         </div>
