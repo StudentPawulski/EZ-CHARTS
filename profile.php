@@ -7,7 +7,7 @@ $userId = $_SESSION['userid'];
 $query = "SELECT username, email, photo FROM userdata WHERE userId = $userId";
 $statement = $db->prepare($query); // Returns a PDOStatement object.
 $statement->execute(); // The query is now executed.
-$profile[0] = $statement->fetchAll();
+$profile = $statement->fetchAll();
 
 $username = $profile['username'];
 $email = $profile['email'];
@@ -66,24 +66,9 @@ $photo = $profile['photo'];
         <div class="container-fluid mt-5">
 
             <!-- Heading -->
-            <div class="card mb-4 wow fadeIn">
+            <div class="card mb-4 wow fadeIn">            
+
                 
-
-                <div class="card-body d-sm-flex justify-content-between">
-
-                    <h4 class="mb-2 mb-sm-0 pt-1">
-                        <span>Profile</span>
-                    </h4>
-                    <h6>User Name: <?= $username ?></h6>
-                    <h6>Email: <?= $email ?></h6>
-
-                    <?php if ($photo == null) : ?>
-                        <a href="photoupload.php" class="btn btn-warning" role="button" >Upload Profile Pic</a>
-                    <?php else : ?>
-                        <img src="<?= $photo ?>" alt="Profile Picture">
-                    <?php endif ?>                    
-                        <a href="dashboard.php" class="btn btn-primary" role="button" >Home</a>
-                </div>
 
             </div>
             <!-- Heading -->
@@ -103,26 +88,18 @@ $photo = $profile['photo'];
                             <!-- List group links -->
                             <div class="list-group list-group-flush">
                                 
-                                <h1>Charts</h1>
+                                <h1>Profile</h1>
+                                <h1><?php pring_r($profile) ?></h1>
 
-                                <?php if (isset($_SESSION['userid'])) : ?>
-                                    <?php foreach ($graphs as $graph) : ?>
-                                      
-                                            <a class="list-group-item list-group-item-action waves-effect" 
-                                                href="viewchart.php?graphId=<?= $graph['graphId'] ?>">
-                                                <?= 'Chart Owner: ' . $graph['username'] ?>
-                                                <span class="badge badge-success badge-pill pull-right"><?= $graph['type'] ?>
-                                                <?php if ($graph['type'] == 'bar') : ?>
-                                                    <i class="fa fa-bar-chart"></i>
-                                                <?php elseif ($graph['type'] == 'line') : ?>
-                                                    <i class="fa fa-line-chart"></i>
-                                                <?php endif ?>
-                                                </span>
-                                                <h6><?= 'Chart title: ' . $graph['title'] ?></h6>
-                                            </a>
-                                        
-                                    <?php endforeach ?>
-                                <?php endif ?>
+                                <h6>User Name: <?= $username ?></h6>
+                                <h6>Email: <?= $email ?></h6>
+
+                                <?php if ($photo == null) : ?>
+                                    <a href="photoupload.php" class="btn btn-warning" role="button" >Upload Profile Pic</a>
+                                <?php else : ?>
+                                    <img src="<?= $photo ?>" alt="Profile Picture">
+                                <?php endif ?>                    
+                                    <a href="dashboard.php" class="btn btn-primary" role="button" >Home</a>
 
 
                             </div>
