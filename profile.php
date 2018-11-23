@@ -78,16 +78,103 @@ $photo = $profile['photo'];
                     <h6>Email: <?= $email ?></h6>
 
                     <?php if ($photo == null) : ?>
-                        <li class="viewli"><a href="photoupload.php" class="btn btn-warning" role="button" >Upload Profile Pic</a></li>
+                        <a href="photoupload.php" class="btn btn-warning" role="button" >Upload Profile Pic</a>
                     <?php else : ?>
                         <img src="<?= $photo ?>" alt="Profile Picture">
                     <?php endif ?>                    
-                        <li class="viewli"><a href="dashboard.php" class="btn btn-primary" role="button" >Home</a></li>
+                        <a href="dashboard.php" class="btn btn-primary" role="button" >Home</a>
                 </div>
 
             </div>
             <!-- Heading -->
-           
+            <!--Grid row-->
+            <div class="row wow fadeIn">
+
+
+                <!--Grid column-->
+                <div class="col-md-3 mb-4">
+
+                    <!--Card-->
+                    <div class="card mb-4">
+
+                        <!--Card content-->
+                        <div class="card-body">
+
+                            <!-- List group links -->
+                            <div class="list-group list-group-flush">
+                                
+                                <h1>Charts</h1>
+
+                                <?php if (isset($_SESSION['userid'])) : ?>
+                                    <?php foreach ($graphs as $graph) : ?>
+                                      
+                                            <a class="list-group-item list-group-item-action waves-effect" 
+                                                href="viewchart.php?graphId=<?= $graph['graphId'] ?>">
+                                                <?= 'Chart Owner: ' . $graph['username'] ?>
+                                                <span class="badge badge-success badge-pill pull-right"><?= $graph['type'] ?>
+                                                <?php if ($graph['type'] == 'bar') : ?>
+                                                    <i class="fa fa-bar-chart"></i>
+                                                <?php elseif ($graph['type'] == 'line') : ?>
+                                                    <i class="fa fa-line-chart"></i>
+                                                <?php endif ?>
+                                                </span>
+                                                <h6><?= 'Chart title: ' . $graph['title'] ?></h6>
+                                            </a>
+                                        
+                                    <?php endforeach ?>
+                                <?php endif ?>
+
+
+                            </div>
+                            <!-- List group links -->
+
+                        </div>
+
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                <!--Grid column-->
+
+
+
+
+                <div class="col-md-6 mb-6">
+                <div class="card mb-5">
+
+                    <!--Card content-->
+                    <div class="card-body">
+                    
+                        <!-- List group links -->
+                        <div class="list-group list-group-flush">
+                        <h1>Users</h1>
+
+                            <?php if (isset($_SESSION['userid'])) : ?>
+                                <?php foreach ($users as $user) : ?>
+                                
+                                        <a class="list-group-item list-group-item-action waves-effect" 
+                                            href="edituser.php?userId=<?= $user['userId'] ?>">
+                                            <?= 'User Name: ' . $user['username'] ?>                                            
+                                            <h6><?= 'User Id: ' . $user['userId'] ?></h6>
+                                            <h6><?= 'Email: ' . $user['email'] ?></h6>
+                                            <h6><?= 'photo: ' . $user['photo'] ?></h6>
+                                        </a>
+                                    
+                                <?php endforeach ?>
+                            <?php endif ?>
+
+
+                        </div>
+                        <!-- List group links -->
+
+                    </div>
+
+                </div>
+                    <!--/.Card-->
+
+            
+            </div>
+            <!--Grid row-->
         </div>
     </main>
     <!--Main layout-->
