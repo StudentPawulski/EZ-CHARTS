@@ -37,6 +37,21 @@ $photo = $profile['photo'];
             text-decoration: none;
             margin-left: 30px;
         }
+        ul.viewul {
+            list-style-type: none;
+            margin: 0 auto;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        li.viewli {
+            float: left;
+        }
+
+        li a.button {
+            display: block;
+            padding: 8px;            
+        }
     </STYLE>
 </head>
 
