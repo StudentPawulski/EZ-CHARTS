@@ -15,7 +15,7 @@ if ($username_from_post != null && $password_from_post != null) {
   $username = filter_var($username_from_post, FILTER_SANITIZE_SPECIAL_CHARS);
   $password = filter_var($password_from_post, FILTER_SANITIZE_SPECIAL_CHARS);
 
-  $query = "SELECT userid, username, hashedPassword, isAdmin FROM userdata WHERE username = '$username' LIMIT 1";
+  $query = "SELECT userid, username, hashedPassword, isAdmin, email FROM userdata WHERE username = '$username' LIMIT 1";
   $statement = $db->prepare($query); // Returns a PDOStatement object.
   $statement->execute(); // The query is now executed.
   $userdata = $statement->fetchAll();
@@ -29,6 +29,7 @@ if ($username_from_post != null && $password_from_post != null) {
       session_start();
       $_SESSION['userid'] = $user['userid'];
       $_SESSION['username'] = $user['username'];
+      $_SESSION['email'] = $user['email'];
       if ($user['isAdmin'] == 1) {
         $_SESSION['isAdmin'] = true;
       }

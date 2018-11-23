@@ -2,11 +2,16 @@
 require('./php/authenticate.php');
 require('./php/connect.php');
 
-$userId = $_SESSION['userId'];
-$query = "SELECT username, email FROM userdata WHERE userId = $userId";
+$userId = $_SESSION['userid'];
+
+$query = "SELECT username, email, photo FROM userdata WHERE userId = $userId";
 $statement = $db->prepare($query); // Returns a PDOStatement object.
 $statement->execute(); // The query is now executed.
-$graphs = $statement->fetchAll();
+$profile[0] = $statement->fetchAll();
+
+$username = $profile['username'];
+$email = $profile['email'];
+$photo = $profile['photo'];
 ?>
 
 <!DOCTYPE html>
@@ -54,9 +59,15 @@ $graphs = $statement->fetchAll();
                     <h4 class="mb-2 mb-sm-0 pt-1">
                         <span>Profile</span>
                     </h4>
-                    <h6>User Name: <?= ?></h6>
-                    <h6>Email: <?= ?></h6>                    
+                    <h6>User Name: <?= $username ?></h6>
+                    <h6>Email: <?= $email ?></h6>
 
+                    <?php if ($photo == null) : ?>
+                        <li class="viewli"><a href="photoupload.php" class="btn btn-warning" role="button" style="display:inline-block;width:200px">Upload Profile Pic</a></li>
+                    <?php else : ?>
+                        <img src="<?= $photo ?>" alt="Profile Picture">
+                    <?php endif ?>                    
+                        <li class="viewli"><a href="dashboard.php" class="btn btn-primary" role="button" style="display:inline-block;width:200px">Home</a></li>
                 </div>
 
             </div>
