@@ -88,6 +88,8 @@ function direct()
                     </h3>
                     <div class="md-form">
                         <label for='image'>Image Filename:</label>
+                    </div>
+                    <div class="md-form">
                         <input type='file' name='image' id='image' class="form-control">
                     </div>
                     <div class="md-form">
