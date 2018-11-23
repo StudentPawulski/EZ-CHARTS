@@ -53,6 +53,11 @@ $photo = $profile['photo'];
             display: block;
             padding: 8px;            
         }
+
+        #profileimage{
+            height: 50px;
+            width: 50px;
+        }
     </STYLE>
 </head>
 
@@ -93,11 +98,14 @@ $photo = $profile['photo'];
                                 <h4><strong>User Name:</strong> <?= $username ?></h6>
                                 <h6><strong>Email: </strong><?= $email ?></h6>
 
-                                <?php if ($photo == null) : ?>
-                                    <a href="photoupload.php" class="btn btn-warning" role="button" >Upload Profile Pic</a>
-                                <?php else : ?>
-                                    <img src="<?= $photo ?>" alt="Profile Picture">
-                                <?php endif ?>                    
+
+                                <?php if ($photo != null) : ?>
+                                <div id='profileimage'>
+                                    <img src="<?= $photo ?>" alt="#">
+                                </div>
+                                <?php endif ?>                                
+                                    <a href="photoupload.php" class="btn btn-warning" role="button" >Upload Profile Pic</a>                              
+                                                  
                                     <a href="dashboard.php" class="btn btn-primary" role="button" >Home</a>
 
 
@@ -115,37 +123,7 @@ $photo = $profile['photo'];
 
 
 
-                <div class="col-md-6 mb-6">
-                <div class="card mb-5">
-
-                    <!--Card content-->
-                    <div class="card-body">
-                    
-                        <!-- List group links -->
-                        <div class="list-group list-group-flush">
-                        <h1>Users</h1>
-
-                            <?php if (isset($_SESSION['userid'])) : ?>
-                                <?php foreach ($users as $user) : ?>
-                                
-                                        <a class="list-group-item list-group-item-action waves-effect" 
-                                            href="edituser.php?userId=<?= $user['userId'] ?>">
-                                            <?= 'User Name: ' . $user['username'] ?>                                            
-                                            <h6><?= 'User Id: ' . $user['userId'] ?></h6>
-                                            <h6><?= 'Email: ' . $user['email'] ?></h6>
-                                            <h6><?= 'photo: ' . $user['photo'] ?></h6>
-                                        </a>
-                                    
-                                <?php endforeach ?>
-                            <?php endif ?>
-
-
-                        </div>
-                        <!-- List group links -->
-
-                    </div>
-
-                </div>
+                
                     <!--/.Card-->
 
             

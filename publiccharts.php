@@ -1,7 +1,7 @@
 <?php
 require('./php/connect.php');
 
-$query = "SELECT graphId, title, type FROM graphdata WHERE isPublic = 1";
+$query = "SELECT graphId, title, xAxisName, yAxisName , type FROM graphdata WHERE isPublic = 1";
 $statement = $db->prepare($query); // Returns a PDOStatement object.
 $statement->execute(); // The query is now executed.
 $graphs = $statement->fetchAll();
@@ -88,7 +88,7 @@ $graphs = $statement->fetchAll();
                 <?php foreach ($graphs as $graph) : ?>
                       
                   <a class="list-group-item list-group-item-action waves-effect" 
-                    href="publicviewchart.php?graphId=<?= $graph['graphId'] ?>">
+                     href="publicviewchart.php?graphId=<?= $graph['graphId'] ?>&p=<?= $graph['xAxisName'] ?>&l=<?= $graph['yAxisName'] ?>">
                     <?= $graph['title'] ?>
                       <span class="badge badge-success badge-pill pull-right"><?= $graph['type'] ?>
                       <?php if ($graph['type'] == 'bar') : ?>

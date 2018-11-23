@@ -4,18 +4,89 @@ require('./php/connect.php');
 
 $userId = $_SESSION['userid'];
 
-if ($_POST) {
+require('./vendor/gumlet/php-image-resize/lib/ImageResize.php');
 
-    $photo_from_post = '';
+use Gumlet\ImageResize;
+use Gumlet\ImageResizeException;
 
-    if (isset($_POST['photo'])) {
-        $photo_from_post = $_POST['photo'];
-    }
+function imageSize($original_image, $size, $new_filename)
+{
+    $image = new ImageResize($original_image);
+    $image->resizeToWidth($size);
+    $image->save('uploads/' . $new_filename);
+}
+
+    // file_upload_path() - Safely build a path String that uses slashes appropriate for our OS.
+    // Default upload path is an 'uploads' sub-folder in the current folder.
+function file_upload_path($original_filename, $upload_subfolder_name = 'uploads')
+{
+    $current_folder = dirname(__FILE__);
+       
+       // Build an array of paths segment names to be joins using OS specific slashes.
+    $path_segments = [$current_folder, $upload_subfolder_name, basename($original_filename)];
+       
+       // The DIRECTORY_SEPARATOR constant is OS specific.
+    return join(DIRECTORY_SEPARATOR, $path_segments);
+}
+
+// file_is_an_image() - Checks the mime-type & extension of the uploaded file for "image-ness".
+function file_is_an_image($temporary_path, $new_path)
+{
+    $allowed_mime_types = ['image/gif', 'image/jpeg', 'image/png', 'application/pdf'];
+    $allowed_file_extensions = ['gif', 'jpg', 'jpeg', 'png', 'pdf'];
+
+    $actual_file_extension = pathinfo($new_path, PATHINFO_EXTENSION);
+    $actual_mime_type = getimagesize($temporary_path)['mime'];
+
+    $file_extension_is_valid = in_array($actual_file_extension, $allowed_file_extensions);
+    $mime_type_is_valid = in_array($actual_mime_type, $allowed_mime_types);
+
+    return $file_extension_is_valid && $mime_type_is_valid;
+}
 
 
+$image_upload_detected = isset($_FILES['image']) && ($_FILES['image']['error'] === 0);
+$upload_error_detected = isset($_FILES['image']) && ($_FILES['image']['error'] > 0);
 
-    if ($photo_from_post != null) {
-        $photo = filter_var($photo_from_post, FILTER_SANITIZE_SPECIAL_CHARS);
+if ($image_upload_detected) {
+    $image_filename = $_FILES['image']['name'];
+    $temporary_image_path = $_FILES['image']['tmp_name'];
+    $new_image_path = file_upload_path($image_filename);
+    if (file_is_an_image($temporary_image_path, $new_image_path)) {
+        move_uploaded_file($temporary_image_path, $new_image_path);
+
+        if ($_FILES['image']['type'] !== 'application/pdf') {
+            $file = explode(".", $image_filename);
+            imageSize($new_image_path, 400, $file[0] . '_medium.' . $file[1]);
+            imageSize($new_image_path, 50, $file[0] . '_thumbnail.' . $file[1]);
+            imageSize($new_image_path, 20, $file[0] . '_fa.' . $file[1]);
+
+            //$new_image_path = str_replace('.' . $file[1], '', $new_image_path);
+
+            //$new_image_path = $new_image_path . '_thumbnail.' . $file[1];
+            $photo = './uploads/' . $file[0] . '_thumbnail.' . $file[1];
+            //$photo = $new_image_path;
+
+            $photo = str_replace("\\", "/", $photo);
+
+
+            //$photo = $image_filename;//$file[1];//$new_image_path;// . '_medium.' . $file[1];
+            $photo1 = $new_image_path;
+            $photo2 = $file[0];
+            $photo3 = $file[1];
+
+
+            $query = "UPDATE userdata 
+                        SET photo = :photo
+                        WHERE userId = :userId";
+            $statement = $db->prepare($query);
+            $statement->bindValue(':userId', $userId);
+            $statement->bindValue(':photo', $photo);
+    // Execute the INSERT.
+            $statement->execute();
+
+            //direct();
+        }
     }
 }
 
@@ -86,15 +157,24 @@ function direct()
                     <h3 class="dark-grey-text text-center">
                       <strong>Upload Profile Photo</strong>
                     </h3>
-                    <div class="md-form">
-                        <label for='image'>Image Filename:</label>
-                    </div>
-                    <div class="md-form">
-                        <input type='file' name='image' id='image' class="form-control">
-                    </div>
-                    <div class="md-form">
-                        <input type='submit' name='submit' value='Upload Image'>
-                    </div>
+
+                    <h3 class="dark-grey-text text-center">
+                      <strong><?= $photo ?></strong>
+                    </h3>
+                    <h3 class="dark-grey-text text-center">
+                      <strong><?= $photo1 ?></strong>
+                    </h3>
+                    <h3 class="dark-grey-text text-center">
+                      <strong><?= $photo2 ?></strong>
+                    </h3>
+                    <h3 class="dark-grey-text text-center">
+                      <strong><?= $photo3 ?></strong>
+                    </h3>
+
+
+                    <label for='image'>Image Filename:</label>
+                    <input type='file' name='image' id='image'>
+                    <input type='submit' name='submit' value='Upload Image'>
                 </form>
                 
                 <?php if ($upload_error_detected) : ?>
@@ -109,44 +189,9 @@ function direct()
                     <p>Temporary Path:       <?= $_FILES['image']['tmp_name'] ?></p>
 
                 <?php endif ?>
-                  <!-- Form -->
-                  <form name="editchart" method="POST" action="edituser.php">
-                    <!-- Heading -->
-                    <h3 class="dark-grey-text text-center">
-                      <strong>Upload Profile Photo</strong>
-                    </h3>
-                    <hr />
-
-                    <div class="md-form">
-                      <input type="text" id="form4" class="form-control" name="userId" value="<?= $users[0]['userId'] ?>"/>
-                      <label for="form3">User Id</label>
-                    </div>
-
-                    <div class="md-form">
-                      <input type="text" class="form-control" name="username" value="<?= $users[0]['username'] ?>">
-                      <label for="form3">User Name</label>
-                    </div>
-
-                    <div class="md-form">
-                      <input type="text" class="form-control" name="email" value="<?= $users[0]['email'] ?>">
-                      <label for="form3">Email Address</label>
-                    </div>
-
-                    <div class="md-form">
-                      <input type="text" class="form-control" name="photo" value="<?= $users[0]['photo'] ?>"/>
-                      <label for="form2">Photo</label>
-                    </div>
-
-                    <div class="text-center">
-                      <button class="btn btn-indigo" type="submit">Submit</button>
-                      <a href="php/deleteuser.php?userId=<?= $userId ?>" class="btn btn-danger btn-rounded" role="button">Delete User</a> 
-                      <hr />
-                    </div>
-                  </form>
-                  <!-- Form -->
-                </div>
+                  
               </div>
-            
+            </div>
         </div>
     </main>
     <!--Main layout-->
