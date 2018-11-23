@@ -8,6 +8,7 @@ $query = "SELECT username, email, photo FROM userdata WHERE userId = $userId";
 $statement = $db->prepare($query); // Returns a PDOStatement object.
 $statement->execute(); // The query is now executed.
 $profile = $statement->fetchAll();
+$profile = $profile[0];
 
 $username = $profile['username'];
 $email = $profile['email'];
