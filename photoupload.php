@@ -65,11 +65,6 @@ if ($image_upload_detected) {
             $photo = './uploads/' . $file[0] . '_thumbnail.' . $file[1];
             $photo = str_replace("\\", "/", $photo);
 
-            $photo1 = $new_image_path;
-            $photo2 = $file[0];
-            $photo3 = $file[1];
-
-
             $query = "UPDATE userdata 
                         SET photo = :photo
                         WHERE userId = :userId";

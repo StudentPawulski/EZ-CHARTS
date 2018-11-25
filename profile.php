@@ -96,7 +96,7 @@ $photo = $profile['photo'];
                                 
                                 <h1>Profile</h1>
                                 <h4><strong>User Name:</strong> <?= $username ?></h6>
-                                <h6><strong>Email: </strong><?= $email ?></h6>
+                                <h6><strong>Email: </strong><?= $email ?></h6> 
 
 
                                 <?php if ($photo != null) : ?>
@@ -104,11 +104,11 @@ $photo = $profile['photo'];
                                     <img src="<?= $photo ?>" alt="#">
                                 </div>
                                 <?php endif ?>                                
-                                    <a href="photoupload.php" class="btn btn-warning" role="button" >Upload Profile Pic</a>                              
-                                                  
+                                    <a href="photoupload.php" class="btn btn-warning" role="button" >Upload Profile Pic</a>
+                                <?php if ($photo != null) : ?>
+                                    <a href="deletephoto.php" class="btn btn-danger" role="button" >Delete Profile Pic</a>
+                                <?php endif ?>                                       
                                     <a href="dashboard.php" class="btn btn-primary" role="button" >Home</a>
-
-
                             </div>
                             <!-- List group links -->
 
