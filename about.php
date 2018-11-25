@@ -132,9 +132,11 @@
                 <div class="text-white text-center py-5 px-4 my-5">
                     <div>
                     <h2 class="card-title h1-responsive pt-3 mb-5 font-bold"><strong>Create beautiful charts with EZ-CHARTS</strong></h2>
-                    <p class="mx-5 mb-5">You now have the graphing power of the universe at your fingertips. Use it wisely!
-                    </p>
-                    <a href="index.php" class="btn btn-outline-white btn-md"><i class="fa fa-clone left"></i>To Log In</a>
+                    <p class="mx-5 mb-5">EZ-CHARTS was created to allow users to create simple yet elegant charts.</p>
+                    <p class="mx-5 mb-5">The charts can be easily exported to .PNG with the click of a button.</p>
+                    <p class="mx-5 mb-5">This also allows users to use these charts instead of the boring old excel charts in their presentations.</p>
+                    <p class="mx-5 mb-5">Have fun! The possibilities are endless.</p>
+                    <a href="index.php" class="btn btn-outline-white btn-md"><i class="fa fa-clone left"></i>Home</a>
                     </div>
                 </div>
             </div>            

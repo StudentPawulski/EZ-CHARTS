@@ -21,17 +21,18 @@ $user_query_result = $statement->fetchAll();
 $users = [];
 
 for ($i = 0; $i < sizeof($user_query_result); $i++) {
-    array_push($users, $user_query_result[$i][0]);
+  array_push($users, $user_query_result[$i][0]);
 }
 
 $registered_usernames = $users;
 $response = [
-    'success' => false,
-    'usernameAvailable' => false
+  'success' => false,
+  'usernameAvailable' => false
 ];
 if (isset($_GET['username']) && (strlen($_GET['username']) !== 0)) {
-    $response['usernameAvailable'] = !in_array($_GET['username'], $registered_usernames);
-    $response['success'] = true;
+  $username_from_get = filter_var($_GET['username'], FILTER_SANITIZE_STRING);
+  $response['usernameAvailable'] = !in_array($username_from_get, $registered_usernames);
+  $response['success'] = true;
 } 
   // Set the JSON MIME content type so that it isn't sent as text/html
 header('Content-Type: application/json');

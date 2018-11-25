@@ -207,13 +207,13 @@ function direct()
                   <form name="editchart" method="POST" action="createchart.php">
                     <!-- Heading -->
                     <h3 class="dark-grey-text text-center">
-                      <strong>Edit the chart data</strong>
+                      <strong>Build the chart with your data</strong>
                     </h3>
                     <hr />
 
                     <div class="md-form">
                       <input type="text" id="form4" class="form-control" name="title" />
-                      <label for="form3">Title</label>
+                      <label >Title</label>
                     </div>
 
                     <div class="md-form">
@@ -223,139 +223,141 @@ function direct()
                         </select>
                     </div>
                     
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" name="public" class="custom-control-input" id="defaultRegisterFormNewsletter">
-                        <label class="custom-control-label" for="defaultRegisterFormNewsletter">Would you like the chart to be viewable by the public?</label>
+                    <div class="md-form">
+                        <select name="public" class="browser-default custom-select">
+                            <option value="1" selected>Viewable By Public</option>
+                            <option value="0">Private Chart</option>                            
+                        </select>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxisName" >
-                      <label for="form3">X Axis Name</label>
+                      <label >X Axis Name</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="yAxisName" >
-                      <label for="form3">Y Axis Name</label>
+                      <label >Y Axis Name</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis1" />
-                      <label for="form2">X Axis 1</label>
+                      <label >X Axis 1</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis2" />
-                      <label for="form2">X Axis 2</label>
+                      <label >X Axis 2</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis3" />
-                      <label for="form2">X Axis 3</label>
+                      <label >X Axis 3</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis4" />
-                      <label for="form2">X Axis 4</label>
+                      <label >X Axis 4</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis5" />
-                      <label for="form2">X Axis 5</label>
+                      <label >X Axis 5</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis6" />
-                      <label for="form2">X Axis 6</label>
+                      <label >X Axis 6</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis7" />
-                      <label for="form2">X Axis 7</label>
+                      <label >X Axis 7</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis8" />
-                      <label for="form2">X Axis 8</label>
+                      <label >X Axis 8</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis9" />
-                      <label for="form2">X Axis 9</label>
+                      <label >X Axis 9</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis10" />
-                      <label for="form2">X Axis 10</label>
+                      <label >X Axis 10</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis11" />
-                      <label for="form2">X Axis 11</label>
+                      <label >X Axis 11</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis12" />
-                      <label for="form2">X Axis 12</label>
+                      <label >X Axis 12</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis1" step="0.01"/>
-                      <label for="form2">Y Axis 1</label>
+                      <label >Y Axis 1</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis2" step="0.01"/>
-                      <label for="form2">Y Axis 2</label>
+                      <label >Y Axis 2</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis3" step="0.01"/>
-                      <label for="form2">Y Axis 3</label>
+                      <label >Y Axis 3</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis4" step="0.01"/>
-                      <label for="form2">Y Axis 4</label>
+                      <label >Y Axis 4</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis5" step="0.01"/>
-                      <label for="form2">Y Axis 5</label>
+                      <label >Y Axis 5</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis6" step="0.01"/>
-                      <label for="form2">Y Axis 6</label>
+                      <label >Y Axis 6</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis7" step="0.01"/>
-                      <label for="form2">Y Axis 7</label>
+                      <label >Y Axis 7</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis8" step="0.01"/>
-                      <label for="form2">Y Axis 8</label>
+                      <label >Y Axis 8</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis9" step="0.01"/>
-                      <label for="form2">Y Axis 9</label>
+                      <label >Y Axis 9</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis10" step="0.01"/>
-                      <label for="form2">Y Axis 10</label>
+                      <label >Y Axis 10</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis11" step="0.01"/>
-                      <label for="form2">Y Axis 11</label>
+                      <label >Y Axis 11</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis12" step="0.01"/>
-                      <label for="form2">Y Axis 12</label>
+                      <label >Y Axis 12</label>
                     </div>
 
                     <div class="text-center">

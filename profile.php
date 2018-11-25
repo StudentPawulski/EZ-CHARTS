@@ -95,7 +95,7 @@ $photo = $profile['photo'];
                             <div class="list-group list-group-flush">
                                 
                                 <h1>Profile</h1>
-                                <h4><strong>User Name:</strong> <?= $username ?></h6>
+                                <h4><strong>User Name:</strong> <?= $username ?></h4>
                                 <h6><strong>Email: </strong><?= $email ?></h6> 
 
 

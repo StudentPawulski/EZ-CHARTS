@@ -114,30 +114,12 @@ if ($_POST) {
         $statement->bindValue(':isPublic', $is_public);
         $statement->bindValue(':xAxisName', $x_axis_name);
         $statement->bindValue(':yAxisName', $y_axis_name);
-        $statement->bindValue(':xAxis1', $x_axis[1]);
-        $statement->bindValue(':xAxis2', $x_axis[2]);
-        $statement->bindValue(':xAxis3', $x_axis[3]);
-        $statement->bindValue(':xAxis4', $x_axis[4]);
-        $statement->bindValue(':xAxis5', $x_axis[5]);
-        $statement->bindValue(':xAxis6', $x_axis[6]);
-        $statement->bindValue(':xAxis7', $x_axis[7]);
-        $statement->bindValue(':xAxis8', $x_axis[8]);
-        $statement->bindValue(':xAxis9', $x_axis[9]);
-        $statement->bindValue(':xAxis10', $x_axis[10]);
-        $statement->bindValue(':xAxis11', $x_axis[11]);
-        $statement->bindValue(':xAxis12', $x_axis[12]);
-        $statement->bindValue(':yAxis1', $y_axis[1]);
-        $statement->bindValue(':yAxis2', $y_axis[2]);
-        $statement->bindValue(':yAxis3', $y_axis[3]);
-        $statement->bindValue(':yAxis4', $y_axis[4]);
-        $statement->bindValue(':yAxis5', $y_axis[5]);
-        $statement->bindValue(':yAxis6', $y_axis[6]);
-        $statement->bindValue(':yAxis7', $y_axis[7]);
-        $statement->bindValue(':yAxis8', $y_axis[8]);
-        $statement->bindValue(':yAxis9', $y_axis[9]);
-        $statement->bindValue(':yAxis10', $y_axis[10]);
-        $statement->bindValue(':yAxis11', $y_axis[11]);
-        $statement->bindValue(':yAxis12', $y_axis[12]);
+
+        for ($i = 1; $i < 13; $i++) {
+            $statement->bindValue(':xAxis1', $x_axis[$i]);
+            $statement->bindValue(':yAxis1', $y_axis[$i]);
+        }
+
     // Execute the INSERT.
         $statement->execute();
         direct();
@@ -157,10 +139,22 @@ function direct()
 }
 
 if (!$_POST) {
-    $query = "SELECT * FROM graphdata WHERE graphId = '$graphId' AND ownerId = '$userid'";
-    $statement = $db->prepare($query); // Returns a PDOStatement object.
-    $statement->execute(); // The query is now executed.
-    $graphs = $statement->fetchAll();
+
+    if (isset($_SESSION['isAdmin'])) {
+        if ($_SESSION['isAdmin'] == true) {
+            $query = "SELECT * FROM graphdata WHERE graphId = '$graphId'";
+            $statement = $db->prepare($query); // Returns a PDOStatement object.
+            $statement->execute(); // The query is now executed.
+            $graphs = $statement->fetchAll();
+        }
+    } else {
+        $query = "SELECT * FROM graphdata WHERE graphId = '$graphId' AND ownerId = '$userid'";
+        $statement = $db->prepare($query); // Returns a PDOStatement object.
+        $statement->execute(); // The query is now executed.
+        $graphs = $statement->fetchAll();
+    }
+
+
 }
 ?>
 
@@ -236,7 +230,7 @@ if (!$_POST) {
 
                     <div class="md-form">
                       <input type="text" id="form4" class="form-control" name="title" value="<?= $graphs[0]['title'] ?>"/>
-                      <label for="form3">Title</label>
+                      <label >Title</label>
                     </div>
 
                     <div class="md-form">
@@ -245,140 +239,142 @@ if (!$_POST) {
                             <option value="line">Line</option>                            
                         </select>
                     </div>
-                    
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" name="public" class="custom-control-input" id="defaultRegisterFormNewsletter">
-                        <label class="custom-control-label" for="defaultRegisterFormNewsletter">Would you like the chart to be viewable by the public?</label>
+
+                    <div class="md-form">
+                        <select name="public" class="browser-default custom-select">
+                            <option value="1" selected>Viewable By Public</option>
+                            <option value="0">Private Chart</option>                            
+                        </select>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxisName" value="<?= $graphs[0]['xAxisName'] ?>">
-                      <label for="form3">X Axis Name</label>
+                      <label >X Axis Name</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="yAxisName" value="<?= $graphs[0]['yAxisName'] ?>">
-                      <label for="form3">Y Axis Name</label>
+                      <label >Y Axis Name</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis1" value="<?= $graphs[0]['xAxis1'] ?>"/>
-                      <label for="form2">X Axis 1</label>
+                      <label >X Axis 1</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis2" value="<?= $graphs[0]['xAxis2'] ?>"/>
-                      <label for="form2">X Axis 2</label>
+                      <label >X Axis 2</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis3" value="<?= $graphs[0]['xAxis3'] ?>"/>
-                      <label for="form2">X Axis 3</label>
+                      <label >X Axis 3</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis4" value="<?= $graphs[0]['xAxis4'] ?>"/>
-                      <label for="form2">X Axis 4</label>
+                      <label >X Axis 4</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis5" value="<?= $graphs[0]['xAxis5'] ?>"/>
-                      <label for="form2">X Axis 5</label>
+                      <label >X Axis 5</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis6" value="<?= $graphs[0]['xAxis6'] ?>"/>
-                      <label for="form2">X Axis 6</label>
+                      <label >X Axis 6</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis7" value="<?= $graphs[0]['xAxis7'] ?>"/>
-                      <label for="form2">X Axis 7</label>
+                      <label >X Axis 7</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis8" value="<?= $graphs[0]['xAxis8'] ?>"/>
-                      <label for="form2">X Axis 8</label>
+                      <label >X Axis 8</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis9" value="<?= $graphs[0]['xAxis9'] ?>"/>
-                      <label for="form2">X Axis 9</label>
+                      <label >X Axis 9</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis10" value="<?= $graphs[0]['xAxis10'] ?>"/>
-                      <label for="form2">X Axis 10</label>
+                      <label >X Axis 10</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis11" value="<?= $graphs[0]['xAxis11'] ?>"/>
-                      <label for="form2">X Axis 11</label>
+                      <label >X Axis 11</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="xAxis12" value="<?= $graphs[0]['xAxis12'] ?>"/>
-                      <label for="form2">X Axis 12</label>
+                      <label >X Axis 12</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis1" value="<?= $graphs[0]['yAxis1'] ?>" step="0.01"/>
-                      <label for="form2">Y Axis 1</label>
+                      <label >Y Axis 1</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis2" value="<?= $graphs[0]['yAxis2'] ?>" step="0.01"/>
-                      <label for="form2">Y Axis 2</label>
+                      <label >Y Axis 2</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis3" value="<?= $graphs[0]['yAxis3'] ?>" step="0.01"/>
-                      <label for="form2">Y Axis 3</label>
+                      <label >Y Axis 3</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis4" value="<?= $graphs[0]['yAxis4'] ?>" step="0.01"/>
-                      <label for="form2">Y Axis 4</label>
+                      <label >Y Axis 4</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis5" value="<?= $graphs[0]['yAxis5'] ?>" step="0.01"/>
-                      <label for="form2">Y Axis 5</label>
+                      <label >Y Axis 5</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis6" value="<?= $graphs[0]['yAxis6'] ?>" step="0.01"/>
-                      <label for="form2">Y Axis 6</label>
+                      <label >Y Axis 6</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis7" value="<?= $graphs[0]['yAxis7'] ?>" step="0.01"/>
-                      <label for="form2">Y Axis 7</label>
+                      <label >Y Axis 7</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis8" value="<?= $graphs[0]['yAxis8'] ?>" step="0.01"/>
-                      <label for="form2">Y Axis 8</label>
+                      <label >Y Axis 8</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis9" value="<?= $graphs[0]['yAxis9'] ?>" step="0.01"/>
-                      <label for="form2">Y Axis 9</label>
+                      <label >Y Axis 9</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis10" value="<?= $graphs[0]['yAxis10'] ?>" step="0.01"/>
-                      <label for="form2">Y Axis 10</label>
+                      <label >Y Axis 10</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis11" value="<?= $graphs[0]['yAxis11'] ?>" step="0.01"/>
-                      <label for="form2">Y Axis 11</label>
+                      <label >Y Axis 11</label>
                     </div>
 
                     <div class="md-form">
                       <input type="number" class="form-control" name="yAxis12" value="<?= $graphs[0]['yAxis12'] ?>" step="0.01"/>
-                      <label for="form2">Y Axis 12</label>
+                      <label >Y Axis 12</label>
                     </div>
 
                     <div class="text-center">

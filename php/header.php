@@ -36,7 +36,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link waves-effect" href="https://mdbootstrap.com/material-design-for-bootstrap/"
+                    <a class="nav-link waves-effect" href="about.php"
                         target="_blank">About EZ-CHARTS</a>
                 </li>
             </ul>
@@ -71,12 +71,12 @@
 <!-- Sidebar -->
 <div class="sidebar-fixed position-fixed">
 
-    <a class="logo-wrapper waves-effect">
+    <a class="logo-wrapper waves-effect" href="dashboard.php">
         <img src="img/EZ.png" class="img-fluid" alt="EZ-CHARTS LOGO">
     </a>
     <div class="list-group list-group-flush">
         
-        <a href="#" class="list-group-item list-group-item-action waves-effect">
+        <a href="dashboard.php" class="list-group-item list-group-item-action waves-effect">
             <i class="fas fa-tachometer-alt mr-3"></i>Dashboard</a>
         <?php if (isset($_SESSION['userid'])) : ?>
             <a href="profile.php" class="list-group-item list-group-item-action waves-effect">

@@ -6,18 +6,41 @@ require('./php/connect.php');
 if (isset($_GET['graphId'])) {
     $graphId = filter_var($_GET['graphId'], FILTER_SANITIZE_NUMBER_INT);
     $userid = $_SESSION['userid'];
+
+
+    if (isset($_SESSION['isAdmin'])) {
+        if ($_SESSION['isAdmin'] == true) {
+
+            $query = "SELECT * FROM graphdata WHERE graphId = '$graphId'";
+            $statement = $db->prepare($query); // Returns a PDOStatement object.
+            $statement->execute(); // The query is now executed.
+            $graphs = $statement->fetchAll();
+
+            $type = $graphs[0]['type'];
+            $yAxisName = $graphs[0]['yAxisName'];
+            $AxisName = $graphs[0]['yAxisName'];
+            $title = $graphs[0]['title'];
+
+        }
+    } else {
+        $query = "SELECT * FROM graphdata WHERE graphId = '$graphId' AND ownerId = '$userid'";
+        $statement = $db->prepare($query); // Returns a PDOStatement object.
+        $statement->execute(); // The query is now executed.
+        $graphs = $statement->fetchAll();
+
+        $type = $graphs[0]['type'];
+        $yAxisName = $graphs[0]['yAxisName'];
+        $AxisName = $graphs[0]['yAxisName'];
+        $title = $graphs[0]['title'];
+    }
 }
 
-$query = "SELECT * FROM graphdata WHERE graphId = '$graphId' AND ownerId = '$userid'";
-$statement = $db->prepare($query); // Returns a PDOStatement object.
-$statement->execute(); // The query is now executed.
-$graphs = $statement->fetchAll();
+
+
+
 
 //echo print_r($graphs);
-$type = $graphs[0]['type'];
-$yAxisName = $graphs[0]['yAxisName'];
-$AxisName = $graphs[0]['yAxisName'];
-$title = $graphs[0]['title'];
+
 //echo print_r($graphs);
 
 $x_axis = []; //array_fill(1, 12, null);

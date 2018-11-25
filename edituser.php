@@ -73,7 +73,7 @@ function direct()
 }
 
 if (!$_POST) {
-    $query = "SELECT * FROM userdata";
+    $query = "SELECT * FROM userdata WHERE userId = $userId";
     $statement = $db->prepare($query); // Returns a PDOStatement object.
     $statement->execute(); // The query is now executed.
     $users = $statement->fetchAll();
@@ -150,22 +150,22 @@ if (!$_POST) {
 
                     <div class="md-form">
                       <input type="text" id="form4" class="form-control" name="userId" value="<?= $users[0]['userId'] ?>"/>
-                      <label for="form3">User Id</label>
+                      <label >User Id</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="username" value="<?= $users[0]['username'] ?>">
-                      <label for="form3">User Name</label>
+                      <label >User Name</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="email" value="<?= $users[0]['email'] ?>">
-                      <label for="form3">Email Address</label>
+                      <label >Email Address</label>
                     </div>
 
                     <div class="md-form">
                       <input type="text" class="form-control" name="photo" value="<?= $users[0]['photo'] ?>"/>
-                      <label for="form2">Photo</label>
+                      <label >Photo</label>
                     </div>
 
                     <div class="text-center">

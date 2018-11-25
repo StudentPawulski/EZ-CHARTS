@@ -24,7 +24,7 @@
         <div class="footer-copyright py-3">
              2018 Created by: Stephen Pawulski, with the help of
             <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a>
-            Charts powered by <a href="https://apexcharts.com">Apex Charts</a>
+            and Charts powered by <a href="https://apexcharts.com">Apex Charts</a>
         </div>
         <!--/.Copyright-->
 

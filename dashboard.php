@@ -157,7 +157,7 @@ if (isset($_SESSION['userid'])) {
             </div>
             <!--Grid row-->
 
-        </div>
+        
     </main>
     <!--Main layout-->
 
