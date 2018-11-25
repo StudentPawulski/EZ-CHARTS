@@ -137,6 +137,11 @@ function direct()
             margin-left: 30px;
         }
     </STYLE>
+    <STYLE type="text/css">
+        .username-available-msg, .username-taken-msg {
+          display: none;
+        }
+    </STYLE>
   </head>
 
   <body>
@@ -190,7 +195,7 @@ function direct()
                 class="nav-link"
                 target="_blank"
               >
-                <i class="fa fa-twitter"></i>
+                <i class="fab fa-twitter"></i>
               </a>
             </li>
             <li class="nav-item">
@@ -199,7 +204,7 @@ function direct()
                 class="nav-link border border-light rounded"
                 target="_blank"
               >
-                <i class="fa fa-github mr-2"></i>EZ-CHARTS GitHub
+                <i class="fab fa-github mr-2"></i>EZ-CHARTS GitHub
               </a>
             </li>
           </ul>
@@ -234,11 +239,17 @@ function direct()
                     <h3 class="dark-grey-text text-center">
                       <strong>Register for your own account</strong>
                     </h3>
+                    <div class="username-available-msg alert alert-primary" role="alert">
+                      Username is available. Please continue to fill out this lovely form.
+                    </div>
+                    <div class="username-taken-msg alert alert-danger" role="alert">
+                      Sorry this username is taken. Please choose a different username.
+                    </div>
                     <hr />
 
                     <div class="md-form">
                       <i class="fa fa-user prefix grey-text"></i>
-                      <input type="text" id="form3" class="form-control" name="username"/>
+                      <input type="text" id="username" class="form-control" name="username"/>
                       <label for="form3">User Name</label>
                     </div>
 
@@ -262,7 +273,7 @@ function direct()
 
 
                     <div class="text-center">
-                      <button class="btn btn-indigo" type="submit">Submit</button>
+                      <button class="btn btn-indigo" id="submitbutton" type="submit">Submit</button>
                       <hr />
                     </div>
                   </form>
@@ -289,6 +300,8 @@ function direct()
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- AJAX -->
+    <script type="text/javascript" src="js/ajax.js"></script>
     <!-- Initializations -->
     <script type="text/javascript">
       // Animations initialization
