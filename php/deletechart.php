@@ -4,7 +4,7 @@ require('connect.php');
 
 function direct()
 {
-    header('Location: http://localhost:31337/webproject/dashboard.php');
+    header('Location: dashboard.php');
     exit;
 }
 
