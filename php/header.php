@@ -76,8 +76,13 @@
     </a>
     <div class="list-group list-group-flush">
         
-        <a href="dashboard.php" class="list-group-item list-group-item-action waves-effect">
+        <?php if (isset($_SESSION['userid'])) : ?>
+            <a href="dashboard.php" class="list-group-item list-group-item-action waves-effect">
             <i class="fas fa-tachometer-alt mr-3"></i>Dashboard</a>
+        <?php else : ?>
+            <a href="publiccharts.php" class="list-group-item list-group-item-action waves-effect">
+            <i class="fas fa-tachometer-alt mr-3"></i>Dashboard</a>
+        <?php endif ?>
         <?php if (isset($_SESSION['userid'])) : ?>
             <a href="profile.php" class="list-group-item list-group-item-action waves-effect">
                 <i class="fa fa-user mr-4"></i>Profile</a>
